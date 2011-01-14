@@ -8,8 +8,8 @@
 </head>
 <body>
     <header>
-        <h1>旅行者日誌</h1>
-        <p>Travel Journal</p>
+        <h1 class="title">旅行者日誌</h1>
+        <p class="title">Travel Journal</p>
     </header>
     <nav>login | nav1 | nav2</nav>
     <article>
