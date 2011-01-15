@@ -1,3 +1,5 @@
+<?php require_once "class.php"; ?>
+<?php $db_server = connect_db();?>
 <!DOCTYPE HTML>
 <html lang="zh-TW">
 <head>
