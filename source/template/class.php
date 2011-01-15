@@ -30,7 +30,6 @@ class Account{
   }
   
   public function login($name, $password){
-      $db_server = connect_db();
       $query = "SELECT aid from ACCOUNT WHERE username='$name' AND password='$password';";
       $result = mysql_query($query);
       if (!$result){
