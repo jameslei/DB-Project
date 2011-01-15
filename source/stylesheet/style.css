@@ -29,6 +29,30 @@ nav{
   background-color: #7D9100;
   height: 20px;
 }
+nav ul{;
+  margin: 0 0 0 20px;
+}
+nav li{
+  list-style: none;
+  float: left;
+  text-align: center;
+  min-width: 50px;
+  min-height: 20px;
+  margin: 0 1px;
+  border-radius: 7px 7px 0 0;
+}
+nav li a{
+  font: 12px;
+  padding: 0 10px;
+  display: block;
+  min-width: 50px;
+  min-height: 20px;
+}
+nav li, nav li:link, nav li:visited, nav li:active          {background: #C0D060;}
+nav li:hover                                                {background: #354242;}
+nav li a, nav li a:link, nav li a:visited, nav li a:active  {color: #293232;}
+nav li a:hover                                              {color: #E9EFEF;}
+
 article{
   background-color: #D5D7A5;
   height: 480px;
