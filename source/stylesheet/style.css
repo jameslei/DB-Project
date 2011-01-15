@@ -85,3 +85,11 @@ footer p{
   border-radius: 0 0 5px 5px;
 }
 #login td,#login th     {padding: 7px 10px;}
+#error{
+  position: fixed;
+  top: 200px;
+  left: 410px;
+  padding: 7px 200px;
+  background-color: #FEFFAC;
+  color:#F00;
+}

@@ -15,7 +15,7 @@ function connect_db(){
 class Account{
   public $name, $id, $traveller;
   function Account($id){
-      $query = "SELECT username, password, aid, uid from ACCOUNT WHERE aid='$id';";
+      $query = "SELECT username, password, aid, uid FROM ACCOUNT WHERE aid='$id';";
       $result = mysql_query($query);
       if (!$result){
           mysql_close($db_server);
@@ -30,7 +30,7 @@ class Account{
   }
   
   public function login($name, $password){
-      $query = "SELECT aid from ACCOUNT WHERE username='$name' AND password='$password';";
+      $query = "SELECT aid FROM ACCOUNT WHERE username='$name' AND password='$password';";
       $result = mysql_query($query);
       if (!$result){
           return false;
@@ -48,7 +48,6 @@ class Account{
 class Traveller{
   public $id, $name, $gender, $birthday, $address;
   Function Traveller($id){
-      $db_server = connect_db();
       $query = "SELECT * from TRAVELLER WHERE uid='$id';";
       $result = mysql_query($query);
       if (!$result){
