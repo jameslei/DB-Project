@@ -93,3 +93,10 @@ footer p{
   background-color: #FEFFAC;
   color:#F00;
 }
+.welcome{
+  position: absolute;
+  margin: 10px;
+  padding: 3px 200px 3px 0;
+  background-color: #BAC282;
+  border-radius: 5px;
+}
