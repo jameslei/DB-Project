@@ -31,6 +31,9 @@ class Account{
           return $user;
       }
   }
+  public function logout(){
+      session_destroy();
+  }
   
   public function login($name, $password){
       $query = "SELECT aid FROM ACCOUNT WHERE username='$name' AND password='$password';";

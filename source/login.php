@@ -10,7 +10,8 @@
     }else{
 ?>
 <?php require_once "template/header.php"; ?>
-<?php if (isset($_GET['fail'])&&$_GET['fail']==1){ ?><div id="error">登入失敗</div><?php }?>
+<?php if (isset($_GET['fail'])&&$_GET['fail']==1){ ?><div class="login_fail">登入失敗</div><?php }?>
+<?php if (isset($_GET['logout'])&&$_GET['logout']==1){ ?><div class="logout">你已成功登出</div><?php }?>
 <div id="login">
     <form action="login.php" method="post" accept-charset="utf-8">
         <table>
