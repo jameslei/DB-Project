@@ -14,18 +14,21 @@ function connect_db(){
 
 class Account{
   public $name, $id, $traveller;
-  function Account($id){
+  function Account($username, $password, $uid){
+      $this->name = $username;
+      $this->password = $password;
+      $this->traveller = Traveller::find($uid);
+  }
+  public function find($id){
       $query = "SELECT username, password, aid, uid FROM ACCOUNT WHERE aid='$id';";
       $result = mysql_query($query);
       if (!$result){
-          mysql_close($db_server);
           return false;
       }else{
           $row = mysql_fetch_row($result);
-          $this->id = $row[2];
-          $this->name = $row[0];
-          $this->password = $row[1];
-          $this->traveller = new Traveller($row[3]);
+          $user = new Account($row[0], $row[1], $row[3]);
+          $user->id = $row[2];
+          return $user;
       }
   }
   
@@ -37,7 +40,8 @@ class Account{
       }else{
           if ($row = mysql_fetch_row($result)){
               $id = $row[0];
-              return new Account($id);
+              $_SESSION['aid'] = $id;
+              return Account::find($id);
           }else{
               return NULL;
           }
@@ -47,19 +51,22 @@ class Account{
 }
 class Traveller{
   public $id, $name, $gender, $birthday, $address;
-  Function Traveller($id){
+  Function Traveller($name, $gender, $birthday, $address){
+      $this->name = $name;
+      $this->gender = $gender;
+      $this->birthday = $birthday;
+      $this->address = $address;
+  }
+  Function find($id){
       $query = "SELECT * from TRAVELLER WHERE uid='$id';";
       $result = mysql_query($query);
       if (!$result){
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $this->id = $row[0];
-              $this->name = $row[1];
-              $this->gender = $row[2];
-              $this->birthday = $row[3];
-              $this->address = $row[4];
-              return $this;
+              $traveller = new Traveller($row[1], $row[2], $row[3], $row[4]);
+              $traveller->id = $row[0];
+              return $traveller;
           }else{
               return NULL;
           }

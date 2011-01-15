@@ -1,12 +1,10 @@
 <?php
-    require_once "template/class.php";
-    $db_server = connect_db();
+    require_once "template/blank.php";
     if (isset($_POST['name'])){
         $user = Account::login($_POST['name'], $_POST['password']);
         if ($user==NULL || $user==false){
             header("Location: login.php?fail=1");
         }else{
-            //登入成功
             header("Location: index.php");
         }
     }else{
