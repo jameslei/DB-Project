@@ -154,7 +154,7 @@
 				<key>SelectedScale</key>
 				<string>Automatic</string>
 				<key>TimelineVisibleRect</key>
-				<string>{{-34, 0}, {544, 496}}</string>
+				<string>{{-46, 0}, {544, 496}}</string>
 				<key>activeColumnIdentifiers</key>
 				<array>
 					<string>IM</string>
@@ -478,6 +478,18 @@
 			<string>20110115170000</string>
 			<key>objectId</key>
 			<integer>6</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.752941</string>
+					<key>g</key>
+					<string>0.752941</string>
+					<key>r</key>
+					<string>0.752941</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>login</string>
 			<key>workSeconds</key>
@@ -489,9 +501,21 @@
 			<key>effort</key>
 			<real>28800</real>
 			<key>forcedStart</key>
-			<string>20110116070000</string>
+			<string>20110115180000</string>
 			<key>objectId</key>
 			<integer>7</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.752941</string>
+					<key>g</key>
+					<string>0.752941</string>
+					<key>r</key>
+					<string>0.752941</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>register</string>
 			<key>workSeconds</key>
@@ -503,9 +527,21 @@
 			<key>effort</key>
 			<real>28800</real>
 			<key>forcedStart</key>
-			<string>20110116110000</string>
+			<string>20110115180000</string>
 			<key>objectId</key>
 			<integer>8</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.898039</string>
+					<key>g</key>
+					<string>0.219608</string>
+					<key>r</key>
+					<string>0.894118</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>index</string>
 			<key>workSeconds</key>
@@ -554,9 +590,21 @@
 			<key>effort</key>
 			<real>28800</real>
 			<key>forcedStart</key>
-			<string>20110117110000</string>
+			<string>20110116203000</string>
 			<key>objectId</key>
 			<integer>11</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.898039</string>
+					<key>g</key>
+					<string>0.219608</string>
+					<key>r</key>
+					<string>0.894118</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>add day</string>
 			<key>workSeconds</key>
@@ -580,6 +628,18 @@
 					<integer>2</integer>
 				</dict>
 			</array>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.898039</string>
+					<key>g</key>
+					<string>0.219608</string>
+					<key>r</key>
+					<string>0.894118</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>day/schedule</string>
 			<key>workSeconds</key>
@@ -603,6 +663,18 @@
 					<integer>2</integer>
 				</dict>
 			</array>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.898039</string>
+					<key>g</key>
+					<string>0.219608</string>
+					<key>r</key>
+					<string>0.894118</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>add schedule</string>
 			<key>workSeconds</key>
@@ -631,6 +703,18 @@
 			<string>20110118170000</string>
 			<key>objectId</key>
 			<integer>16</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.752941</string>
+					<key>g</key>
+					<string>0.752941</string>
+					<key>r</key>
+					<string>0.752941</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>fav.</string>
 			<key>workSeconds</key>
@@ -668,6 +752,18 @@
 			<string>20110118190000</string>
 			<key>objectId</key>
 			<integer>18</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.898039</string>
+					<key>g</key>
+					<string>0.219608</string>
+					<key>r</key>
+					<string>0.894118</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>city</string>
 			<key>workSeconds</key>
@@ -682,6 +778,18 @@
 			<string>20110118200000</string>
 			<key>objectId</key>
 			<integer>19</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.752941</string>
+					<key>g</key>
+					<string>0.752941</string>
+					<key>r</key>
+					<string>0.752941</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>edit everything</string>
 			<key>workSeconds</key>
@@ -719,6 +827,18 @@
 			<string>20110119000000</string>
 			<key>objectId</key>
 			<integer>26</integer>
+			<key>style</key>
+			<dict>
+				<key>gantt-fill-color</key>
+				<dict>
+					<key>b</key>
+					<string>0.101961</string>
+					<key>g</key>
+					<string>0.101961</string>
+					<key>r</key>
+					<string>0.101961</string>
+				</dict>
+			</dict>
 			<key>task</key>
 			<string>debug/test</string>
 			<key>workSeconds</key>
