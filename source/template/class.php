@@ -88,7 +88,7 @@ class Traveller{
 	  }  
   }
   Function getTrip($uid){
-      $query = "SELECT * from TRIP WHERE owner_id='$uid' AND belongs_to="Traveller"";
+      $query = "SELECT * from TRIP WHERE owner_id='$uid' AND belongs_to='Traveller'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
