@@ -146,8 +146,58 @@ class Group{
   }
 }
 class Trip{
+<<<<<<< HEAD
   public $id, $name, $type, $time, $status, $group_id;
   Function Trip($type, $name, $time, $status, $group_id){
+=======
+<<<<<<< HEAD
+  public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
+  Function Trip($id){              //find trip
+	$query = "SELECT * FROM TRIP WHERE tid='$id';";
+	if (!$result){
+		return false;
+	}else{
+		if ($row = myseql_fetch_row($result)){
+			$this->id = $row[0];
+			$this->name = $row[1];
+			$this->type = $row[2];
+			$this->time = $row[3];
+			$this->status = $row[4];
+			$this->belongs_to = $row[5];
+			$this->owner_id = $row[6];
+		}else{
+			return NULL;
+		}
+	}
+}
+  Function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+		$this->name = $name;
+		$this->type = $type;
+		$this->time = $time;
+		$this->status = $status;
+		$this->belongs_to = $belongs_to;
+		$this->group_id = $owner_id;
+  }
+  Function Save(){      			//save trip  create new or alter existing
+	if ($this->id == NULL){  		//new trip
+		// SQL INSERT
+		$query = "INSERT INTO trip(name, type, time, status, belongs_to, owner_id) VALUES('$this->name','$this->type','$this->time','$this->status','$this->belongs_to','$this->owner_id');";
+		$result = mysql_query($query);
+
+	}else{  						//existing trip
+		// SQL UPDATE
+		$query = "UPDATE trip SET name='$this->name', type='$this->type', time='$this->time', status='$this->status', belongs_to='$this->belongs_to', owner_id='$this->owner_id';";
+		$result = mysql_query($query);
+	}
+	if(!$result){
+		return false;	
+	}else{
+		return true;
+	}
+=======
+  public $id, $type, $time, $status, $group_id;
+  Function Trip($type, $time, $status, $group_id){
+>>>>>>> ba71a3cc6c484c2bf437a8402b8d2d8bf0be1b39
       $this->type = $type;
 	  $this->name = $name;
       $this->time = $time;
@@ -168,6 +218,7 @@ class Trip{
               return NULL;
           }
       }
+>>>>>>> b203a5bb9d43c09717135ac0dcdb389a738fa282
   }
 }
 class Location{
