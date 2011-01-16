@@ -93,15 +93,16 @@ class Account{
       if ($this->id==NULL){
           $t = $this->traveller;
           $query = "INSERT INTO ACCOUNT (`aid`, `username`, `password`, `uid`) VALUES (NULL, '$this->name', '$this->password', '$t->id');";
-          $result = mysql_query($query);
-           if ($result){
-                $this->id = mysql_insert_id();
-                return true;
-            }else{
-                die("error!");
-            }
+      }else{//只能改密碼
+          $query = "UPDATE ACCOUNT SET `password` = \'$this->password\' WHERE `ACCOUNT`.`aid` = $this->id;";
+      }
+      $result = mysql_query($query);
+      if ($result){
+        if ($this->id==NULL)
+            $this->id = mysql_insert_id();
+        return true;
       }else{
-          echo "update";
+        die("error!");
       }
   }
   public function login($name, $password){
@@ -132,15 +133,16 @@ class Traveller{
   public Function save(){
       if ($this->id==NULL){
           $query = "INSERT INTO TRAVELLER (`uid`, `name`, `gender`, `bdate`, `addr`) VALUES (NULL, '$this->name', '$this->gender', '$this->birthday', '$this->address');";
-          $result = mysql_query($query);
-          if ($result){
-              $this->id = mysql_insert_id();
-              return true;
-          }else{
-              die("error!");
-          }
       }else{
-          echo "update";
+          $sql = "UPDATE TRAVELLER SET `name` = \'$this->name\', `gender` = \'$this->gender\', `bdate` = \'$this->birthday\', `addr` = \'$this->address\' WHERE `uid` = $this->id;";
+      }
+      $result = mysql_query($query);
+      if ($result){
+          if ($this->id==NULL)
+              $this->id = mysql_insert_id();
+          return true;
+      }else{
+          die("error!");
       }
   }
   Function find($id){
