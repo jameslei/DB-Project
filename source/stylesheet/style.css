@@ -1,6 +1,8 @@
 html, body{
   background: #293232;
 }
+a, a:link, a:visited, a:active  {color: #293232;}
+a:hover                         {color: #354242;}
 header, nav, article, footer{
   width: 900px;
   margin: 0 auto;
@@ -51,14 +53,22 @@ nav li a{
 nav li, nav li:link, nav li:visited, nav li:active          {background: #C0D060;}
 nav li:hover                                                {background: #354242;}
 nav li a, nav li a:link, nav li a:visited, nav li a:active  {color: #293232;}
-nav li a:hover                                              {color: #E9EFEF;}
-
+nav li a:hover                                              {color: #E7FF60;}
 article{
   background-color: #D5D7A5;
   height: 480px;
 }
-article a, article a:link, article a:visited, article a:active  {color:#E5FF45;}
-article a:hover                                                 {color:#F7FFC3;}
+article .head      {background: #354242; border-radius: 7px 7px 0 0; color:#E7FF60;}
+article .left      {border-left: 1px solid #fff;}
+article .right     {border-right: 1px solid #fff;}
+article .foot      {
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-radius: 0 0 5px 5px;
+}
+article td, article th     {padding: 7px 10px; background-color:#EBEEBF;}
+article table      {margin: auto;}
 footer{
   background-color: #C9DE55;
   height: 20px;
@@ -76,17 +86,12 @@ footer p{
   margin: auto;
   padding: 10px;
 }
-#login table      {margin: auto;}
-#login .head      {background: #354242; border-radius: 7px 7px 0 0; color:#E7FF60;}
-#login .left      {border-left: 1px solid #fff;}
-#login .right     {border-right: 1px solid #fff;}
-#login .foot{
-  border-left: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-radius: 0 0 5px 5px;
+#signup{
+  position: relative;
+  top: 100px;
+  margin: auto;
+  padding: 10px;
 }
-#login td,#login th     {padding: 7px 10px;}
 .login_fail{
   position: fixed;
   top: 200px;
@@ -104,9 +109,11 @@ footer p{
   color:#F00;
 }
 .welcome{
-  position: absolute;
-  margin: 10px;
-  padding: 3px 200px 3px 0;
+  float:right;
+  padding: 3px 5px 3px 100px;
   background-color: #BAC282;
-  border-radius: 5px;
+  border-radius: 0 0 0 5px;
+  font-size: 90%;
 }
+.welcome a, .welcome a:link, .welcome a:visited, .welcome a:active  {color: #EF3C00;}
+.welcome a:hover                                                    {color: #C95F09;}

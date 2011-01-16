@@ -19,6 +19,41 @@ function login_first(){
         header("Location: login.php?relog=1");
     }
 }
+function mb_string_intersect($string1, $string2, $minChars = 5)
+{   assert('$minChars > 1');
+    $string1 = trim($string1);
+    $string2 = trim($string2);
+    $length1 = mb_strlen($string1);
+    $length2 = mb_strlen($string2);
+    if ($length1 > $length2) {
+        // swap variables, shortest first
+        $string3 = $string1;
+        $string1 = $string2;
+        $string2 = $string3;
+        $length3 = $length1;
+        $length1 = $length2;
+        $length2 = $length3;
+        unset($string3, $length3);
+    }
+    if ($length2 > 255) {
+        return null; // to much calculation required
+    }
+    for ($l = $length1; $l >= $minChars; --$l) { // length
+        for ($i = 0, $ix = $length1 - $l; $i <= $ix; ++$i) { // index
+            $substring1 = mb_substr($string1, $i, $l);
+            $found = mb_strpos($string2, $substring1);
+            if ($found !== false) {
+                return trim(mb_substr($string2, $found, mb_strlen($substring1)));
+            }
+        }
+    }
+    return null;
+}
+function site_root(){
+ //   $file =  explode($_SERVER['PHP_SELF'],mb_string_intersect($_SERVER['SCRIPT_FILENAME'],$_SERVER['PHP_SELF']));
+    return $file[0];
+}
+
 
 class Account{
   public $name, $id, $traveller;
@@ -42,7 +77,19 @@ class Account{
   public function logout(){
       session_destroy();
   }
-  
+  public function exist($name){
+      $query = "SELECT aid FROM ACCOUNT WHERE username='$name';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              return true;
+          }else{
+              return false;
+          }
+      }
+  }
   public function login($name, $password){
       $query = "SELECT aid FROM ACCOUNT WHERE username='$name' AND password='$password';";
       $result = mysql_query($query);

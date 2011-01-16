@@ -28,7 +28,7 @@
                 <td class="right"><input type="password" size="20" name="password" /></td>
             </tr>
             <tr class="foot">
-                <td>&nbsp;</td>
+                <td><a href="signup.php">新使用者?</a></td>
                 <td><input type="submit" value="Continue &rarr;" /></td>
             </tr>
         </table>
