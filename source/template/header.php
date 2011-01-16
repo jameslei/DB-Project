@@ -1,5 +1,4 @@
-<?php require_once "class.php"; ?>
-<?php $db_server = connect_db();?>
+<?php require_once "blank.php"; ?>
 <!DOCTYPE HTML>
 <html lang="zh-TW">
 <head>

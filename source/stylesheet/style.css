@@ -57,6 +57,8 @@ article{
   background-color: #D5D7A5;
   height: 480px;
 }
+article a, article a:link, article a:visited, article a:active  {color:#E5FF45;}
+article a:hover                                                 {color:#F7FFC3;}
 footer{
   background-color: #C9DE55;
   height: 20px;
@@ -85,3 +87,26 @@ footer p{
   border-radius: 0 0 5px 5px;
 }
 #login td,#login th     {padding: 7px 10px;}
+.login_fail{
+  position: fixed;
+  top: 200px;
+  left: 410px;
+  padding: 7px 200px;
+  background-color: #FEFFAC;
+  color:#F00;
+}
+.logout{
+  position: fixed;
+  top: 200px;
+  left: 392px;
+  padding: 7px 200px;
+  background-color: #FEFFAC;
+  color:#F00;
+}
+.welcome{
+  position: absolute;
+  margin: 10px;
+  padding: 3px 200px 3px 0;
+  background-color: #BAC282;
+  border-radius: 5px;
+}
