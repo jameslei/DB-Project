@@ -4,7 +4,7 @@ function connect_db(){
     if (!$link){
       die("connection wrong: <br />".mysql_error());
     }
-
+    mysql_query("SET NAMES 'utf8'");
     $db_select = mysql_select_db("Travel Journal");
     if (!$db_select){
       die("selection wrong: <br />".mysql_error());
