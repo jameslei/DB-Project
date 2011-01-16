@@ -236,7 +236,7 @@ class Trip{
 		$this->time = $time;
 		$this->status = $status;
 		$this->belongs_to = $belongs_to;
-		$this->group_id = $owner_id;
+		$this->owner_id = $owner_id;
   }
   Function Save(){      			//save trip  create new or alter existing
 	if ($this->id == NULL){  		//new trip
