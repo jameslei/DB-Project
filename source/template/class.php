@@ -91,13 +91,21 @@ class Account{
   }
   public function save(){
       if ($this->id==NULL){
-          echo "insert";
+          $t = $this->traveller;
+          $query = "INSERT INTO ACCOUNT (`aid`, `username`, `password`, `uid`) VALUES (NULL, '$this->name', '$this->password', '$t->id');";
+          $result = mysql_query($query);
+           if ($result){
+                $this->id = mysql_insert_id();
+                return true;
+            }else{
+                die("error!");
+            }
       }else{
           echo "update";
       }
   }
   public function login($name, $password){
-      $query = "SELECT aid FROM ACCOUNT WHERE username='$name' AND password='$password'";
+      $query = "SELECT aid FROM ACCOUNT WHERE username='$name' AND password='$password';";
       $result = mysql_query($query);
       if (!$result){
           return false;
