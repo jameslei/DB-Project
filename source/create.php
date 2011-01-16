@@ -18,10 +18,11 @@
                                    $_POST['traveller']['gender'], 
                                    $_POST['traveller']['birthday'], 
                                    $_POST['traveller']['address']);
-        print_r($traveller);
         if ($traveller->save()){
-            $account = New Account($_POST['account']['user'], $_POST['account']['password'], $traveller->id);
-            $account.save();
+            $account = New Account($_POST['account']['name'], $_POST['account']['password'], $traveller->id);
+            if ($account->save()){
+                header("Location: login.php?success=1");
+            }
         }
         
     }
