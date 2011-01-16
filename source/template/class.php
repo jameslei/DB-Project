@@ -241,6 +241,28 @@ class Group{
           return $member;
       }
   }
+  public function new_member($uid){
+      $query = "INSERT INTO `GROUP_TRAVELLER` (`gid`, `uid`) VALUES (\'$this->id\', \'$uid\');";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          return true;
+      }
+  }
+  public function creator(){
+      $query = "SELECT `uid` FROM `GROUP` WHERE `gid` = $this->id ;";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              return Traveller::find($row[0]);
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
