@@ -71,7 +71,38 @@ class Group{
   public $id, $name, $description, $account_id;
 }
 class Trip{
-  public $id, $type, $time, $status, $group_id;
+  public $id, $name, $type, $time, $status, $group_id;
+  Function Trip($id){
+	$query = "SELECT * FROM TRIP WHERE tid='$id';";
+	if (!$result){
+		return false;
+	}else{
+		if ($row = myseql_fetch_row($result)){
+			$this->id = $row[0];
+			$this->name = $row[1];
+			$this->type = $row[2];
+			$this->time = $row[3];
+			$this->status = $row[4];
+			$this->group_id = $row[5];
+		}else{
+			return NULL;
+		}
+	}
+}
+  Function Trip($name, $type, $time, $status, $group_id){
+		$this->name = $name;
+		$this->type = $type;
+		$this->time = $time;
+		$this->status = $status;
+		$this->group_id = $group_id;
+  }
+  Function Save(){
+	if ($this->id == NULL){
+		// SQL INSERT
+	}else{
+		// SQL UPDATE
+	}
+  }
 }
 class Location{
   public $id, $name, $trip_id, $city_id, $next, $next_traffic;
