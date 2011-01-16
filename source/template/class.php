@@ -54,7 +54,6 @@ function site_root(){
     return $file[0];
 }
 
-
 class Account{
   public $name, $id, $traveller;
   function Account($username, $password, $uid){
@@ -90,6 +89,13 @@ class Account{
           }
       }
   }
+  public function save(){
+      if ($this->id==NULL){
+          echo "insert";
+      }else{
+          echo "update";
+      }
+  }
   public function login($name, $password){
       $query = "SELECT aid FROM ACCOUNT WHERE username='$name' AND password='$password';";
       $result = mysql_query($query);
@@ -114,6 +120,20 @@ class Traveller{
       $this->gender = $gender;
       $this->birthday = $birthday;
       $this->address = $address;
+  }
+  public Function save(){
+      if ($this->id==NULL){
+          $query = "INSERT INTO TRAVELLER (`uid`, `name`, `gender`, `bdate`, `addr`) VALUES (NULL, '$this->name', '$this->gender', '$this->birthday', '$this->address');";
+          $result = mysql_query($query);
+          if ($result){
+              $this->id = mysql_insert_id();
+              return true;
+          }else{
+              die("error!");
+          }
+      }else{
+          echo "update";
+      }
   }
   Function find($id){
       $query = "SELECT * from TRAVELLER WHERE uid='$id';";

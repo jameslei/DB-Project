@@ -14,7 +14,16 @@
     }elseif (Account::exist($_POST['account']['name'])==true){
         header("Location: signup.php?error=name");
     }else{
-        $traveller = new Traveller();
+        $traveller = new Traveller($_POST['traveller']['name'],
+                                   $_POST['traveller']['gender'], 
+                                   $_POST['traveller']['birthday'], 
+                                   $_POST['traveller']['address']);
+        print_r($traveller);
+        if ($traveller->save()){
+            $account = New Account($_POST['account']['user'], $_POST['account']['password'], $traveller->id);
+            $account.save();
+        }
+        
     }
 
 ?>

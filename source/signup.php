@@ -30,7 +30,7 @@
                 <td class="left">&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>地址</td>
-                <td class="right"><input type="text" name="traveller[name]" /></td>
+                <td class="right"><input type="text" name="traveller[address]" /></td>
             </tr>
             <tr class="foot">
                 <td>&nbsp;</td>
