@@ -221,30 +221,7 @@ class Group{
   }
 }
 class Trip{
-<<<<<<< HEAD
-  public $id, $name, $type, $time, $status, $group_id;
-  Function Trip($type, $name, $time, $status, $group_id){
-=======
-<<<<<<< HEAD
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
-  Function Trip($id){              //find trip
-	$query = "SELECT * FROM TRIP WHERE tid='$id';";
-	if (!$result){
-		return false;
-	}else{
-		if ($row = myseql_fetch_row($result)){
-			$this->id = $row[0];
-			$this->name = $row[1];
-			$this->type = $row[2];
-			$this->time = $row[3];
-			$this->status = $row[4];
-			$this->belongs_to = $row[5];
-			$this->owner_id = $row[6];
-		}else{
-			return NULL;
-		}
-	}
-}
   Function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		$this->name = $name;
 		$this->type = $type;
@@ -269,31 +246,19 @@ class Trip{
 	}else{
 		return true;
 	}
-=======
-  public $id, $type, $time, $status, $group_id;
-  Function Trip($type, $time, $status, $group_id){
->>>>>>> ba71a3cc6c484c2bf437a8402b8d2d8bf0be1b39
-      $this->type = $type;
-	  $this->name = $name;
-      $this->time = $time;
-      $this->status = $status;
-      $this->group_id = $group_id;
   }
   Function find($id){
-      $query = "SELECT * from TRIP WHERE tid='$id'";
-      $result = mysql_query($query);
-      if (!$result){
-          return false;
-      }else{
-          if ($row = mysql_fetch_row($result)){
-              $trip = new Trip($row[1], $row[2], $row[3], $row[4], $row[5]);
-              $trip->id = $row[0];
-              return $trip;
-          }else{
-              return NULL;
-          }
-      }
->>>>>>> b203a5bb9d43c09717135ac0dcdb389a738fa282
+	$query = "SELECT * FROM TRIP WHERE tid='$id';";
+	if (!$result){
+		return false;
+	}else{
+		if ($row = myseql_fetch_row($result)){
+			$trip = new Trip($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]);
+			return $trip;
+		}else{
+			return NULL;
+		}
+	}
   }
 }
 class Location{
