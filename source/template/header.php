@@ -1,4 +1,5 @@
 <?php require_once "blank.php"; ?>
+<?php if (strchr($_SERVER["PHP_SELF"], "login.php")==NULL){login_first();} ?>
 <!DOCTYPE HTML>
 <html lang="zh-TW">
 <head>

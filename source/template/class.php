@@ -12,6 +12,14 @@ function connect_db(){
     return $link;
 }
 
+function login_first(){
+    if (!isset($_SESSION['aid']) || Account::find($_SESSION['aid'])==false 
+    || Account::find($_SESSION['aid'])==NULL ){
+        session_destroy();
+        header("Location: login.php?relog=1");
+    }
+}
+
 class Account{
   public $name, $id, $traveller;
   function Account($username, $password, $uid){
