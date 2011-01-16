@@ -182,18 +182,21 @@ class Traveller{
 		  return $t_array;
 	  }  
   }
-  Function getGroup($id){
-      $query = "SELECT * from GROUP WHERE gid='$id'";
+  Function getGroup($uid){
+      $query = "SELECT * from GROUP WHERE user_id='$uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      echo "Group number : ".$row[0]."<br/>";
-		      echo "Group name : ".$row[1]."<br/>";
-			  echo "Description : ".$row[2]."<br/>";
-			  echo "User id : ".$row[3]."<br/>";
+		      $group = new Group;
+		      $group->id = $row[0];
+			  $group->name = $row[1];
+			  $group->description = $row[2];
+			  $group->user_id = $row[3];
+			  $g_array[] = $group;
 		  }
+		  return $g_array;
 	  }  
   }
 }
