@@ -215,7 +215,7 @@ class Group{
       $this->user_id = $user_id;
   }
   Function find($id){
-      $query = "SELECT * from GROUP WHERE gid='$id'";
+      $query = "SELECT * FROM `GROUP` WHERE gid=$id";
       $result = mysql_query($query);
       if (!$result){
           return false;
@@ -227,6 +227,18 @@ class Group{
           }else{
               return NULL;
           }
+      }
+  }
+  public function members(){
+      $query = "SELECT `TRAVELLER`.`uid` FROM `GROUP_TRAVELLER`, `TRAVELLER` where `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid`=`TRAVELLER`.`uid`;";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          while ($row = mysql_fetch_row($result)){
+              $member[] = Traveller::find($row[0]);
+          }
+          return $member;
       }
   }
 }
