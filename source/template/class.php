@@ -77,30 +77,206 @@ class Traveller{
   }
 }
 class Group{
-  public $id, $name, $description, $account_id;
+  public $id, $name, $description, $user_id;
+  Function Group($name, $description, $user_id){
+      $this->name = $name;
+      $this->description = $description;
+      $this->user_id = $user_id;
+  }
+  Function find($id){
+      $query = "SELECT * from GROUP WHERE gid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $group = new Group($row[1], $row[2], $row[3]);
+              $group->id = $row[0];
+              return $group;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Trip{
   public $id, $type, $time, $status, $group_id;
+  Function Trip($type, $time, $status, $group_id){
+      $this->type = $type;
+      $this->time = $time;
+      $this->status = $status;
+      $this->address = $group_id;
+  }
+  Function find($id){
+      $query = "SELECT * from TRIP WHERE tid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $trip = new Trip($row[1], $row[2], $row[3], $row[4]);
+              $trip->id = $row[0];
+              return $trip;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Location{
   public $id, $name, $trip_id, $city_id, $next, $next_traffic;
+  Function Location($name, $trip_id, $city_id, $next, $next_traffic){
+      $this->name = $name;
+      $this->trip_id = $trip_id;
+      $this->city_id = $city_id;
+      $this->next = $next;
+	  $this->next_traffic = $next_traffic;
+  }
+  Function find($id){
+      $query = "SELECT * from LOCATION WHERE lid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $location = new Location($row[1], $row[3], $row[5], $row[4], $row[2]);
+              $loaction->id = $row[0];
+              return $location;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Day{
   public $id, $date, $next;
+  Function Day($date, $next){
+      $this->date = $date;
+      $this->next = $next;
+  }
+  Function find($id){
+      $query = "SELECT * from DAY WHERE did='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $day = new Day($row[1], $row[3]);
+              $day->id = $row[0];
+              return $day;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Schedule{
-  public $id, $time, $expanse_id, $next;
+  public $id, $time, $next;
+  Function Schedule($time, $next){
+      $this->time = $time;
+      $this->next = $next;
+  }
+  Function find($id){
+      $query = "SELECT * from SCHEDULE WHERE sid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $shedule = new Schedule($row[1], $row[3]);
+              $shedule->id = $row[0];
+              return $schedule;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Favorite{
   public $id, $name, $time, $type, $note, $location_id;
+  Function Favorite($name, $time, $type, $note, $location_id){
+      $this->name = $name;
+      $this->time = $time;
+      $this->type = $type;
+      $this->note = $note;
+	  $this->location_id = $location_id;
+  }
+  Function find($id){
+      $query = "SELECT * from FAVORITE WHERE fid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $favorite = new Favorite($row[1], $row[2], $row[3], $row[4], $row[5]);
+              $favorite->id = $row[0];
+              return $favorite;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
-class city{
-  public $name, $country;
+class City{
+  public $id, $name, $country;
+  Function City($name, $country){
+      $this->name = $name;
+      $this->country = $country;
+  }
+  Function find($id){
+      $query = "SELECT * from CITY WHERE cid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $city = new City($row[1], $row[0]);
+              $city->id = $row[2];
+              return $city;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Country{
   public $name;
+  Function find($name){
+      $query = "SELECT * from COUNTRY WHERE name='$name';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $country->name = $row[0];
+              return $country;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Shelter{
   public $id, $name, $info, $location_id;
+  Function Shelter($name, $info, $location_id){
+      $this->name = $name;
+      $this->info = $info;
+      $this->location_id = $location_id;
+  }
+  Function find($id){
+      $query = "SELECT * from SHELTER WHERE shid='$id';";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $shelter = new Shelter($row[1], $row[2], $row[3]);
+              $shelter->id = $row[0];
+              return $shelter;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 ?>
