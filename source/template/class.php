@@ -237,13 +237,18 @@ class Group{
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
+<<<<<<< HEAD
   function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+=======
+  Function Trip($id, $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+		$this->id = $id;
+>>>>>>> 3fd2abc411d794b04615cc5969fb5c9df0d2b31a
 		$this->name = $name;
 		$this->type = $type;
 		$this->time = $time;
 		$this->status = $status;
 		$this->belongs_to = $belongs_to;
-		$this->group_id = $owner_id;
+		$this->owner_id = $owner_id;
   }
   public function Save(){      			//save trip  create new or alter existing
 	if ($this->id == NULL){  		//new trip
@@ -262,8 +267,14 @@ class Trip{
 		return true;
 	}
   }
+<<<<<<< HEAD
   public function find($id){
 	$query = "SELECT * FROM TRIP WHERE tid='$id';";
+=======
+  Function find($id){
+	$query = "SELECT * FROM TRIP WHERE tid=$id;";
+	$result = mysql_query($query);
+>>>>>>> 3fd2abc411d794b04615cc5969fb5c9df0d2b31a
 	if (!$result){
 		return false;
 	}else{
