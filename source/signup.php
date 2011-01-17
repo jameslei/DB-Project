@@ -1,5 +1,16 @@
 <?header("Cache-control:private");?>
-<?php require_once "template/header.php"; ?>
+<?php require_once "template/header.php"; 
+      if (isset($_GET['error'])){
+          if ($_GET['error']=="empty"){
+              $error_message="資料不能為空";
+          }elseif ($_GET['error']=="password"){
+              $error_message="密碼輸入有錯";
+          }elseif ($_GET['error']=="name"){
+              $error_message="登入名稱已存在";
+          }
+          echo '<div class="logout">'.$error_message.'</div>';
+      }
+?>
 <div id="signup">
     <form action="create.php" method="post" accept-charset="utf-8">
         <table>
