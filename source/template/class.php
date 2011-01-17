@@ -266,13 +266,14 @@ class Group{
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
-  Function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+  Function Trip($id, $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+		$this->id = $id;
 		$this->name = $name;
 		$this->type = $type;
 		$this->time = $time;
 		$this->status = $status;
 		$this->belongs_to = $belongs_to;
-		$this->group_id = $owner_id;
+		$this->owner_id = $owner_id;
   }
   Function Save(){      			//save trip  create new or alter existing
 	if ($this->id == NULL){  		//new trip
@@ -291,12 +292,23 @@ class Trip{
 		return true;
 	}
   }
+  Function get_days($id){
+	$trip = find($id);
+	$query = "SELECT * FROM DAY WHERE tid=$id"
+	$result = mysql_query($query);
+	if(!$result){
+		return false;
+	}else{
+		return $result;
+	}
+  }
   Function find($id){
-	$query = "SELECT * FROM TRIP WHERE tid='$id';";
+	$query = "SELECT * FROM TRIP WHERE tid=$id;";
+	$result = mysql_query($query);
 	if (!$result){
 		return false;
 	}else{
-		if ($row = myseql_fetch_row($result)){
+		if ($row = mysql_fetch_row($result)){
 			$trip = new Trip($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]);
 			return $trip;
 		}else{
