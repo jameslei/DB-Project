@@ -86,7 +86,7 @@ footer p{
   margin: auto;
   padding: 10px;
 }
-#signup{
+#signup, #newgroup{
   position: relative;
   top: 100px;
   margin: auto;
@@ -127,10 +127,13 @@ footer p{
 }
 #dashboard table  { margin:0; width: 100%;}
 #dashboard th     { color: #293232; background: #C0D060; border-radius: 10px 10px 0 0;}
-#dashboard>div    { width: 45%;padding: 10px;}
+#dashboard>div    { padding: 10px;}
 #dashboard .left  { border:0; float: left; clear: both;}
 #dashboard .right { border:0; float: right; clear: right;}
 #dashboard ul     { float: right; background: #fff; border-radius:0 0 0 10px;}
 #dashboard li     { padding: 5px; list-style: none; float: left;}
 #dashboard li a   { color: #293232;}
 #dashboard li a:hover{ color: #000;}
+.sixty               { width: 60%;}
+.thirty              { width: 30%;}
+.forty-five          { width: 45%;}

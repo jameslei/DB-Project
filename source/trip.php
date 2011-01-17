@@ -15,7 +15,7 @@
 ?>
 <h1><?php echo $trip->name ; ?></h1>
 <div id="dashboard">
-    <div id="day" class="left">
+    <div id="day" class="sixty left">
         <table>
         	<tr>
         		<th>日期</th>
@@ -49,7 +49,7 @@
             <li><a href="add_day.php?id=<?php echo $trip->id?>">新增下一天</a></li>
         <ul>
     </div>
-    <div class="right">
+    <div class="thirty right">
         <h1>成員</h1>
         <table>
             <tr>
@@ -63,7 +63,7 @@
             <li><a href="#">更多...</a></li>
         </ul>
     </div>
-    <div class="right">
+    <div class="thirty right">
         <h1>♥</h1>
         <table>
             <tr>
