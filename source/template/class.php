@@ -209,12 +209,30 @@ class Group{
   const accepted = '已接受';
   const declined = '已拒絕';
   const new_invite = '尚未接受';
-  public $id, $name, $description, $creator_id;
+  public $id, $name, $description, $creator_id;  //creator_id在DB裡叫做uid喔
   function Group($name, $description, $creator_id){
       $this->name = $name;
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
+  public function Save(){
+	 if ($this->id == NULL){  		//new group
+		// SQL INSERT
+		$query = "INSERT INTO `group`(name, description, uid) VALUES('$this->name','$this->description','$this->creator_id');";
+		$result = mysql_query($query);
+
+	}else{  						//existing group
+		// SQL UPDATE
+		$query = "UPDATE `group` SET name='$this->name', description='$this->description', uid='$this->creator_id' WHERE id='$this->id';";
+		$result = mysql_query($query);
+	}
+	if(!$result){
+		return false;	
+	}else{
+		return true;
+	}
+	
+}
   function find($id){
       $query = "SELECT * FROM `GROUP` WHERE gid=$id";
       $result = mysql_query($query);
@@ -278,7 +296,7 @@ class Trip{
 
 	}else{  						//existing trip
 		// SQL UPDATE
-		$query = "UPDATE trip SET name='$this->name', type='$this->type', time='$this->time', status='$this->status', belongs_to='$this->belongs_to', owner_id='$this->owner_id';";
+		$query = "UPDATE trip SET name='$this->name', type='$this->type', time='$this->time', status='$this->status', belongs_to='$this->belongs_to', owner_id='$this->owner_id' WHERE id='$this->id';";
 		$result = mysql_query($query);
 	}
 	if(!$result){
