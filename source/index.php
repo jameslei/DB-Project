@@ -9,24 +9,40 @@
 <?php 
 
 $traveller = $user->traveller;
-$uid = $traveller->id;
-echo "$uid";
-echo $traveller->getTrip($uid);
-$trip_array[] = $traveller->getTrip($uid);
+$uid = ($traveller->id)-1;
+//測試用,之後不用減一
+//echo "$uid";
+//echo "$traveller->getTrip($uid)";
+//$trip_array[] = Traveller::getTrip($uid);
+$trip_array = Traveller::getTrip($uid);
+//$trip_array[] = $traveller->getTrip($uid);
 //echo $traveller->id;
 // get trip object array
-$j = 0;
-if(($traveller->getTrip($uid))!=NULL){
-    foreach ($traveller->getTrip($uid) as $trip_list){
-        echo "$j : $trip_list->time, $trip_list->name</br>";
-	    ++$j;
+$j = 1;
+if($trip_array!=NULL){
+    echo "<table>";
+	echo "<tr>";
+    echo "<td>Num</td>";
+	echo "<td>Date</td>";
+	echo "<td>Name</td>";
+	echo "</tr>";
+    foreach ($trip_array as $trip_list){
+	    echo "<tr>";
+		echo "<td>$j</td>";
+		echo "<td>$trip_list->time</td>";
+		echo ' <a href = "trip.php?id=$t_id" > ';
+		echo "<td>$trip_list->name</td>";
+	    echo "</a>";
+		echo "</tr>";
+		++$j;
     }
+	echo "</table>";
 }else{
     echo "尚無資料";
 }
 
 ?>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/>
 <?php $t_id=$user->traveller->id; ?>
 
 <a href = "newtrip.php?id=$t_id&belongs_to="traveller"">新增一個旅程</a><br/><br/>  
@@ -92,7 +108,5 @@ if($result != NULL){
     echo "尚無資料";
 }
 ?>
-
-
 
 <?php require_once "template/footer.php"; ?>

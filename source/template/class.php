@@ -171,23 +171,16 @@ class Traveller{
 	  }  
   }
   public function getTrip($uid){
-      $query = "SELECT * from TRIP WHERE belongs_to = "traveller" AND owner_id = '$uid'";
+      $query = "SELECT * from TRIP WHERE belongs_to='group' AND owner_id = 'uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-              $trip = new Trip;
-			  $trip->id = $row[0];
-			  $trip->name = $row[1];
-			  $trip->type = $row[2];
-			  $trip->time = $row[3];
-			  $trip->status = $row[4];
-			  $trip->belongs_to = $row[5];
-			  $trip->owner_id = $row[6];
+              $trip = new Trip($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
 			  $t_array[] = $trip;
 		  }
-		  if ($t_array!=NULL){ 
+		  if ($t_array!=NULL){ 		      
 		      return $t_array;
 		  }else{
 		      return NULL;
@@ -237,12 +230,8 @@ class Group{
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
-<<<<<<< HEAD
-  function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
-=======
-  Function Trip($id, $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+  function Trip($id, $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		$this->id = $id;
->>>>>>> 3fd2abc411d794b04615cc5969fb5c9df0d2b31a
 		$this->name = $name;
 		$this->type = $type;
 		$this->time = $time;
@@ -267,14 +256,10 @@ class Trip{
 		return true;
 	}
   }
-<<<<<<< HEAD
+
   public function find($id){
-	$query = "SELECT * FROM TRIP WHERE tid='$id';";
-=======
-  Function find($id){
 	$query = "SELECT * FROM TRIP WHERE tid=$id;";
 	$result = mysql_query($query);
->>>>>>> 3fd2abc411d794b04615cc5969fb5c9df0d2b31a
 	if (!$result){
 		return false;
 	}else{
@@ -287,16 +272,18 @@ class Trip{
 	}
   }
 }
+
+
 class Location{
   public $id, $name, $trip_id, $city_id, $next, $next_traffic;
-  Function Location($name, $trip_id, $city_id, $next, $next_traffic){
+  function Location($name, $trip_id, $city_id, $next, $next_traffic){
       $this->name = $name;
       $this->trip_id = $trip_id;
       $this->city_id = $city_id;
       $this->next = $next;
 	  $this->next_traffic = $next_traffic;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from LOCATION WHERE lid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -314,11 +301,11 @@ class Location{
 }
 class Day{
   public $id, $date, $next;
-  Function Day($date, $next){
+  function Day($date, $next){
       $this->date = $date;
       $this->next = $next;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from DAY WHERE did='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -336,11 +323,11 @@ class Day{
 }
 class Schedule{
   public $id, $time, $next;
-  Function Schedule($time, $next){
+  function Schedule($time, $next){
       $this->time = $time;
       $this->next = $next;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from SCHEDULE WHERE sid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -358,14 +345,14 @@ class Schedule{
 }
 class Favorite{
   public $id, $name, $time, $type, $note, $location_id;
-  Function Favorite($name, $time, $type, $note, $location_id){
+  function Favorite($name, $time, $type, $note, $location_id){
       $this->name = $name;
       $this->time = $time;
       $this->type = $type;
       $this->note = $note;
 	  $this->location_id = $location_id;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from FAVORITE WHERE fid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -383,11 +370,11 @@ class Favorite{
 }
 class City{
   public $id, $name, $country;
-  Function City($name, $country){
+  function City($name, $country){
       $this->name = $name;
       $this->country = $country;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -405,7 +392,7 @@ class City{
 }
 class Country{
   public $name;
-  Function find($name){
+  public function find($name){
       $query = "SELECT * from COUNTRY WHERE name='$name'";
       $result = mysql_query($query);
       if (!$result){
@@ -422,12 +409,12 @@ class Country{
 }
 class Shelter{
   public $id, $name, $info, $location_id;
-  Function Shelter($name, $info, $location_id){
+  function Shelter($name, $info, $location_id){
       $this->name = $name;
       $this->info = $info;
       $this->location_id = $location_id;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from SHELTER WHERE shid='$id'";
       $result = mysql_query($query);
       if (!$result){
