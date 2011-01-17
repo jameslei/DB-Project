@@ -4,7 +4,7 @@ function connect_db(){
     if (!$link){
       die("connection wrong: <br />".mysql_error());
     }
-
+    mysql_query("SET NAMES 'utf8';");
     $db_select = mysql_select_db("Travel Journal");
     if (!$db_select){
       die("selection wrong: <br />".mysql_error());
@@ -143,7 +143,7 @@ class Traveller{
           echo "update";
       }
   }
-  function find($id){
+  public function find($id){
       $query = "SELECT * from TRAVELLER WHERE uid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -158,7 +158,7 @@ class Traveller{
           }
       }
   }
-  function getCity($id){
+  public function getCity($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
 	  $result = mysql_query($query);
 	  if(!$result){
@@ -170,50 +170,53 @@ class Traveller{
 		  }
 	  }  
   }
-  function getTrip($uid){
-      $query = "SELECT * from TRIP WHERE owner_id='$uid' AND belongs_to='Traveller'";
+  public function getTrip($uid){
+      $query = "SELECT * from TRIP WHERE belongs_to='group' AND owner_id = 'uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-              $trip = new Trip;
-			  $trip->id = $row[0];
-			  $trip->name = $row[1];
-			  $trip->type = $row[2];
-			  $trip->time = $row[3];
-			  $trip->status = $row[4];
-			  $trip->belongs_to = $row[5];
-			  $trip->owner_id = $row[6];
+              $trip = new Trip($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
 			  $t_array[] = $trip;
 		  }
-		  return $t_array;
+		  if ($t_array!=NULL){ 		      
+		      return $t_array;
+		  }else{
+		      return NULL;
+		  }
 	  }  
   }
-  function getGroup($id){
-      $query = "SELECT * from GROUP WHERE gid='$id'";
+  public function getGroup($uid){
+      $query = "SELECT * from GROUP WHERE user_id='$uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      echo "Group number : ".$row[0]."<br/>";
-		      echo "Group name : ".$row[1]."<br/>";
-			  echo "Description : ".$row[2]."<br/>";
-			  echo "User id : ".$row[3]."<br/>";
+		      $group = new Group;
+		      $group->id = $row[0];
+			  $group->name = $row[1];
+			  $group->description = $row[2];
+			  $group->user_id = $row[3];
+			  $g_array[] = $group;
 		  }
+		  return $g_array;
 	  }  
   }
 }
 class Group{
-  public $id, $name, $description, $user_id;
-  function Group($name, $description, $user_id){
+  const accepted = '已接受';
+  const declined = '已拒絕';
+  const new_invite = '尚未接受';
+  public $id, $name, $description, $creator_id;
+  function Group($name, $description, $creator_id){
       $this->name = $name;
       $this->description = $description;
-      $this->user_id = $user_id;
+      $this->creator_id = $creator_id;
   }
   function find($id){
-      $query = "SELECT * from GROUP WHERE gid='$id'";
+      $query = "SELECT * FROM `GROUP` WHERE gid=$id";
       $result = mysql_query($query);
       if (!$result){
           return false;
@@ -227,9 +230,35 @@ class Group{
           }
       }
   }
+  public function members(){
+      $query = "SELECT `TRAVELLER`.`uid` FROM `GROUP_TRAVELLER`, `TRAVELLER` where `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid`=`TRAVELLER`.`uid`;";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          while ($row = mysql_fetch_row($result)){
+              $member[] = Traveller::find($row[0]);
+          }
+          return $member;
+      }
+  }
+  public function new_member($uid){
+      $query = "INSERT INTO `GROUP_TRAVELLER` (`gid`, `uid`, `invite_status`) VALUES (\'$this->id\', \'$uid\', \'".$this::new_invite."\');";
+      $result = mysql_query($query);
+      return (!$result)? false : true;
+  }
+  public function remove_member($uid){
+      $query = "DELETE FROM `GROUP_TRAVELLER` WHERE `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid` = $uid;";
+      $result = mysql_query($query);
+      return (!$result)? false : true; 
+  }
+  public function creator(){
+      return Traveller::find($this->creator_id);
+  }
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
+
   function Trip( $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		// $this->id = $id;    manual add id
 		$this->name = $name;
@@ -239,7 +268,9 @@ class Trip{
 		$this->belongs_to = $belongs_to;
 		$this->owner_id = $owner_id;
   }
-  function Save(){      			//save trip  create new or alter existing
+
+  public function Save(){      			//save trip  create new or alter existing
+
 	if ($this->id == NULL){  		//new trip
 		// SQL INSERT
 		$query = "INSERT INTO trip(name, type, time, status, belongs_to, owner_id) VALUES('$this->name','$this->type','$this->time','$this->status','$this->belongs_to','$this->owner_id');";
@@ -256,6 +287,7 @@ class Trip{
 		return true;
 	}
   }
+
   function get_days(){
 	$trip = Trip::find($this->id);
 	$query = "SELECT * FROM DAY WHERE tid=$this->id ;";
@@ -266,7 +298,8 @@ class Trip{
 		return $result;
 	}
   }
-  function find($id){
+
+  public function find($id){
 	$query = "SELECT * FROM TRIP WHERE tid=$id;";
 	$result = mysql_query($query);
 	if (!$result){
@@ -282,6 +315,8 @@ class Trip{
 	}
   }
 }
+
+
 class Location{
   public $id, $name, $trip_id, $city_id, $next, $next_traffic;
   function Location($name, $trip_id, $city_id, $next, $next_traffic){
@@ -291,7 +326,8 @@ class Location{
       $this->next = $next;
 	  $this->next_traffic = $next_traffic;
   }
-  function find($id){
+
+  public function find($id){
       $query = "SELECT * from LOCATION WHERE lid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -310,11 +346,13 @@ class Location{
 class Day{
   public $id, $date, $next, $tid;
   function Day($date, $next, $tid){
+
       $this->date = $date;
       $this->next = $next;
 	  $this->tid = $tid;
   }
-  function find($id){
+
+  public function find($id){
       $query = "SELECT * from DAY WHERE did='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -349,7 +387,8 @@ class Schedule{
       $this->time = $time;
       $this->next = $next;
   }
-  function find($id){
+
+  public function find($id){
       $query = "SELECT * from SCHEDULE WHERE sid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -374,7 +413,8 @@ class Favorite{
       $this->note = $note;
 	  $this->location_id = $location_id;
   }
-  function find($id){
+
+  public function find($id){
       $query = "SELECT * from FAVORITE WHERE fid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -396,7 +436,8 @@ class City{
       $this->name = $name;
       $this->country = $country;
   }
-  function find($id){
+
+  public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -414,7 +455,8 @@ class City{
 }
 class Country{
   public $name;
-  function find($name){
+
+  public function find($name){
       $query = "SELECT * from COUNTRY WHERE name='$name'";
       $result = mysql_query($query);
       if (!$result){
@@ -436,7 +478,8 @@ class Shelter{
       $this->info = $info;
       $this->location_id = $location_id;
   }
-  function find($id){
+
+  public function find($id){
       $query = "SELECT * from SHELTER WHERE shid='$id'";
       $result = mysql_query($query);
       if (!$result){
