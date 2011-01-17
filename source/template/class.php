@@ -123,13 +123,13 @@ class Account{
 }
 class Traveller{
   public $id, $name, $gender, $birthday, $address;
-  Function Traveller($name, $gender, $birthday, $address){
+  function Traveller($name, $gender, $birthday, $address){
       $this->name = $name;
       $this->gender = $gender;
       $this->birthday = $birthday;
       $this->address = $address;
   }
-  public Function save(){
+  public function save(){
       if ($this->id==NULL){
           $query = "INSERT INTO TRAVELLER (`uid`, `name`, `gender`, `bdate`, `addr`) VALUES (NULL, '$this->name', '$this->gender', '$this->birthday', '$this->address');";
           $result = mysql_query($query);
@@ -143,7 +143,7 @@ class Traveller{
           echo "update";
       }
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from TRAVELLER WHERE uid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -158,7 +158,7 @@ class Traveller{
           }
       }
   }
-  Function getCity($id){
+  public function getCity($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
 	  $result = mysql_query($query);
 	  if(!$result){
@@ -170,8 +170,8 @@ class Traveller{
 		  }
 	  }  
   }
-  Function getTrip($uid){
-      $query = "SELECT * from TRIP WHERE owner_id='$uid' AND belongs_to='Traveller'";
+  public function getTrip($uid){
+      $query = "SELECT * from TRIP WHERE belongs_to = "traveller" AND owner_id = '$uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
@@ -187,10 +187,14 @@ class Traveller{
 			  $trip->owner_id = $row[6];
 			  $t_array[] = $trip;
 		  }
-		  return $t_array;
+		  if ($t_array!=NULL){ 
+		      return $t_array;
+		  }else{
+		      return NULL;
+		  }
 	  }  
   }
-  Function getGroup($uid){
+  public function getGroup($uid){
       $query = "SELECT * from GROUP WHERE user_id='$uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
@@ -210,12 +214,12 @@ class Traveller{
 }
 class Group{
   public $id, $name, $description, $user_id;
-  Function Group($name, $description, $user_id){
+  function Group($name, $description, $user_id){
       $this->name = $name;
       $this->description = $description;
       $this->user_id = $user_id;
   }
-  Function find($id){
+  public function find($id){
       $query = "SELECT * from GROUP WHERE gid='$id'";
       $result = mysql_query($query);
       if (!$result){
@@ -233,7 +237,7 @@ class Group{
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
-  Function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
+  function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		$this->name = $name;
 		$this->type = $type;
 		$this->time = $time;
@@ -241,7 +245,7 @@ class Trip{
 		$this->belongs_to = $belongs_to;
 		$this->group_id = $owner_id;
   }
-  Function Save(){      			//save trip  create new or alter existing
+  public function Save(){      			//save trip  create new or alter existing
 	if ($this->id == NULL){  		//new trip
 		// SQL INSERT
 		$query = "INSERT INTO trip(name, type, time, status, belongs_to, owner_id) VALUES('$this->name','$this->type','$this->time','$this->status','$this->belongs_to','$this->owner_id');";
@@ -258,12 +262,12 @@ class Trip{
 		return true;
 	}
   }
-  Function find($id){
+  public function find($id){
 	$query = "SELECT * FROM TRIP WHERE tid='$id';";
 	if (!$result){
 		return false;
 	}else{
-		if ($row = myseql_fetch_row($result)){
+		if ($row = mysql_fetch_row($result)){
 			$trip = new Trip($row[0],$row[1],$row[2],$row[3],$row[4],$row[5],$row[6]);
 			return $trip;
 		}else{
