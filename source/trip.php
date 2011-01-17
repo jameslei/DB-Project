@@ -3,6 +3,12 @@
 	$id = $_GET["id"];
 	$trip = Trip::find($id);
 	// find all the days of the trip
+	$days = $trip->get_days; // $days contains all the days of the trip
+	$temp = 0;
+	while(mysql_fetch_row($days)){
+		
+	}
+	
 	
 ?>
 <table>

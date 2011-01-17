@@ -256,6 +256,16 @@ class Trip{
 		return true;
 	}
   }
+  Function get_days($id){
+	$trip = find($id);
+	$query = "SELECT * FROM DAY WHERE tid=$id"
+	$result = mysql_query($query);
+	if(!$result){
+		return false;
+	}else{
+		return $result;
+	}
+  }
   Function find($id){
 	$query = "SELECT * FROM TRIP WHERE tid=$id;";
 	$result = mysql_query($query);
