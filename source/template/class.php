@@ -4,7 +4,7 @@ function connect_db(){
     if (!$link){
       die("connection wrong: <br />".mysql_error());
     }
-    mysql_query("SET NAMES 'utf8'");
+    mysql_query("SET NAMES 'utf8';");
     $db_select = mysql_select_db("Travel Journal");
     if (!$db_select){
       die("selection wrong: <br />".mysql_error());
@@ -250,6 +250,9 @@ class Group{
           return true;
       }
   }
+  public function remove_member($uid){
+      $query = "DELETE FROM `Travel Journal`.`GROUP_TRAVELLER` WHERE `GROUP_TRAVELLER`.`gid` = 1 AND `GROUP_TRAVELLER`.`uid` = 3";
+  }
   public function creator(){
       $query = "SELECT `uid` FROM `GROUP` WHERE `gid` = $this->id ;";
       $result = mysql_query($query);
@@ -263,6 +266,7 @@ class Group{
           }
       }
   }
+  
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
@@ -294,7 +298,7 @@ class Trip{
   }
   Function get_days($id){
 	$trip = find($id);
-	$query = "SELECT * FROM DAY WHERE tid=$id"
+	$query = "SELECT * FROM DAY WHERE tid=$id";
 	$result = mysql_query($query);
 	if(!$result){
 		return false;

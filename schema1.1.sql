@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `ACCOUNT` (
   `uid` int(11) NOT NULL,
   PRIMARY KEY (`aid`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 列出以下資料庫的數據： `ACCOUNT`
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `CITY` (
   `cid` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`cid`),
   KEY `cname` (`cname`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `CITY`
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `CITY` (
 CREATE TABLE IF NOT EXISTS `COUNTRY` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 列出以下資料庫的數據： `COUNTRY`
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `DAY` (
   PRIMARY KEY (`did`),
   KEY `next` (`next`),
   KEY `tid` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `DAY`
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `DAYS_SCHEDULE` (
   `sid` int(11) NOT NULL,
   PRIMARY KEY (`did`,`sid`),
   KEY `sid` (`sid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 列出以下資料庫的數據： `DAYS_SCHEDULE`
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `EXPANSE` (
   `purchase` varchar(255) NOT NULL,
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `EXPANSE`
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `FAV_THING` (
   `lid` int(11) NOT NULL,
   PRIMARY KEY (`fid`),
   KEY `lid` (`lid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `FAV_THING`
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `GROUP` (
   `uid` int(11) NOT NULL,
   PRIMARY KEY (`gid`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `GROUP`
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `GROUP_TRAVELLER` (
   `invite_status` varchar(255) NOT NULL,
   PRIMARY KEY (`gid`,`uid`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 列出以下資料庫的數據： `GROUP_TRAVELLER`
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `LOCATION` (
   KEY `tid` (`tid`),
   KEY `next` (`next`),
   KEY `cid` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `LOCATION`
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `LOCATION_DAY` (
   `did` int(11) NOT NULL,
   PRIMARY KEY (`lid`,`did`),
   KEY `did` (`did`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 列出以下資料庫的數據： `LOCATION_DAY`
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `SCHEDULE` (
   `next` int(11) DEFAULT NULL,
   PRIMARY KEY (`sid`),
   KEY `next` (`next`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `SCHEDULE`
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `SHELTER` (
   PRIMARY KEY (`shid`),
   KEY `lid` (`lid`),
   KEY `did` (`did`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- 列出以下資料庫的數據： `SHELTER`
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `TRAVELLER` (
   `bdate` date NOT NULL,
   `addr` varchar(255) NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 列出以下資料庫的數據： `TRAVELLER`
@@ -310,7 +310,7 @@ CREATE TABLE IF NOT EXISTS `TRAVELLER_CITY` (
   `cid` int(11) NOT NULL,
   PRIMARY KEY (`uid`,`cid`),
   KEY `cid` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 列出以下資料庫的數據： `TRAVELLER_CITY`
@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `TRIP` (
   `belongs_to` varchar(255) NOT NULL,
   `owner_id` int(11) NOT NULL,
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 列出以下資料庫的數據： `TRIP`
