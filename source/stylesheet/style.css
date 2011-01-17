@@ -79,7 +79,7 @@ footer p{
   padding: 3px;
 }
 
-#login{
+#login, #newtrip{
   position: relative;
   top: 100px;
   width: 300px;
@@ -122,7 +122,7 @@ footer p{
   border-radius: 10px 10px 0 10px;
   background: #354242;
   color: #E7FF60;
-  padding: 5px;
+  padding: 5px 10px;
   max-width:50px;
 }
 #dashboard table  { margin:0; width: 100%;}
