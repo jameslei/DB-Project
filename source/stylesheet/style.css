@@ -78,7 +78,7 @@ footer p{
   font-size: 10px;
   padding: 3px;
 }
-
+/*
 #login, #newtrip{
   position: relative;
   top: 100px;
@@ -86,7 +86,8 @@ footer p{
   margin: auto;
   padding: 10px;
 }
-#signup, #newgroup, div.center{
+#signup, #newgroup, */
+article>div{
   position: relative;
   top: 100px;
   margin: auto;

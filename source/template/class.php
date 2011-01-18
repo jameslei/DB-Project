@@ -214,32 +214,15 @@ class Traveller{
   }
 }
 class Group{
-<<<<<<< HEAD
-  public $id, $name, $description, $user_id;
-  function Group($id, $name, $description, $user_id){
-      $this->id = $id;
-=======
   const accepted = '已接受';
   const declined = '已拒絕';
   const new_invite = '尚未接受';
   public $id, $name, $description, $creator_id;  //creator_id在DB裡叫做uid喔
   function Group($name, $description, $creator_id){
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
       $this->name = $name;
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
-<<<<<<< HEAD
-    public function Save(){      			//save trip  create new or alter existing
-	if ($this->id == NULL){  		//new trip
-		// SQL INSERT
-		$query = "INSERT INTO group(name, description, user_id) VALUES('$this->name','$this->description','$this->user_id');";
-		$result = mysql_query($query);
-
-	}else{  						//existing trip
-		// SQL UPDATE
-		$query = "UPDATE group SET name='$this->name', type='$this->description', time='$this->user_id';";
-=======
   public function Save(){
 	 if ($this->id == NULL){  		//new group
 		// SQL INSERT
@@ -249,7 +232,6 @@ class Group{
 	}else{  						//existing group
 		// SQL UPDATE
 		$query = "UPDATE `group` SET name='$this->name', description='$this->description', uid='$this->creator_id' WHERE id='$this->id';";
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
 		$result = mysql_query($query);
 	}
 	if(!$result){
@@ -257,34 +239,22 @@ class Group{
 	}else{
 		return true;
 	}
-<<<<<<< HEAD
   }
   public function find($id){
       $query = "SELECT * FROM GROUP WHERE gid=$id;";
-=======
-	
-}
-  function find($id){
-      $query = "SELECT * FROM `GROUP` WHERE gid=$id";
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
       $result = mysql_query($query);
       if (!$result){
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-<<<<<<< HEAD
-              $group = new Group($row[0], $row[1], $row[2], $row[3]);
-=======
               $group = new Group($row[1], $row[2], $row[3]);  //name, description, uid
               $group->id = $row[0];
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
               return $group;
           }else{
               return NULL;
           }
       }
   }
-<<<<<<< HEAD
   public function getCount($gid){
       $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
 	  $result = mysql_query($query);
@@ -294,7 +264,7 @@ class Group{
 	  }else{
 	      return $rows;
 	  }
-=======
+  }
   public function members(){
       $query = "SELECT `TRAVELLER`.`uid` FROM `GROUP_TRAVELLER`, `TRAVELLER` where `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid`=`TRAVELLER`.`uid`;";
       $result = mysql_query($query);
@@ -309,7 +279,7 @@ class Group{
       }
   }
   public function new_member($uid){
-      $query = "INSERT INTO `GROUP_TRAVELLER` (`gid`, `uid`, `invite_status`) VALUES (\'$this->id\', \'$uid\', \'".$this::accepted."\');";
+      $query = "INSERT INTO `GROUP_TRAVELLER` (`gid`, `uid`, `invite_status`) VALUES ('$this->id', '$uid', '".$this::accepted."');";
       $result = mysql_query($query);
       return (!$result)? false : true;
   }
@@ -334,7 +304,6 @@ class Group{
 		 }
 		 return $trip_list;
 	}
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
   }
 }
 class Trip{
@@ -512,13 +481,11 @@ class Favorite{
   }
 }
 class City{
-  public $country, $name, $id;
-  function City($country, $name, $id){
-      $this->country = $country;
-	  $this->name = $name;
-	  $this->id = $id;         
+  public $id, $name, $country;
+  function City($name, $country){
+      $this->name = $name;
+      $this->country = Country::find($country);
   }
-
   public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
       $result = mysql_query($query);
@@ -526,25 +493,39 @@ class City{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $city = new City($row[0], $row[1], $row[2]);
+              $city = new City($row[1], $row[0]);
+              $city->id = $row[2];
               return $city;
           }else{
               return NULL;
           }
       }
   }
+  public function save(){
+    $country = $this->country;
+  	if ($this->id == NULL){
+  		$query = "INSERT INTO `Travel Journal`.`CITY` (`country_id`, `name`, `cid`) VALUES ('$country->id', '$this->name', NULL);";
+  	}else{
+  		$query = "UPDATE `Travel Journal`.`CITY` SET `country_id` = '$country->id', `name` = '$this->name' WHERE `CITY`.`cid` = $this->id;";
+  	}
+  	$result = mysql_query($query);
+  	return (!$result) ? false : true;
+  }
 }
 class Country{
-  public $name;
-
-  public function find($name){
-      $query = "SELECT * from COUNTRY WHERE name='$name'";
+  public $name, $id;
+  public function Country($name){
+      $this->name = $name;
+  }
+  public function find($id){
+      $query = "SELECT * from COUNTRY WHERE country_id='$id'";
       $result = mysql_query($query);
       if (!$result){
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $country->name = $row[0];
+              $country = new Country($row[1]);
+              $country->id = $row[0];
               return $country;
           }else{
               return NULL;
