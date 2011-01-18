@@ -182,7 +182,8 @@ class Traveller{
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      $city = new City($row[0], $row[1], $row[2]);
+		      $city = new City($row[1], $row[0]);
+			  $city->cid->$row[2];
 			  $c_array[] = $city;
 		  }
 		  if ($c_array!=NULL){
@@ -230,8 +231,7 @@ class Traveller{
 		  }
 	  }  
   }
-  public function getGroup($uid){
-      //$query = "SELECT name, count(*) FROM (SELECT * FROM GROUP JOIN GROUP_TRAVELLER GROUP_TRAVELLER.gid = GROUP.gid) WHERE GROUP_TRAVELLER.uid = '$uid'";
+  public function getGroup($uid){     
 	  $query = "SELECT * FROM `GROUP`, `GROUP_TRAVELLER` WHERE `GROUP_TRAVELLER`.uid=$uid AND `GROUP_TRAVELLER`.gid=`GROUP`.gid";
 	  $result = mysql_query($query);
 	  if(!$result){
@@ -250,6 +250,7 @@ class Traveller{
 	  }  
   }
 }
+
 class Group{
 
   const accepted = '已接受';
@@ -261,10 +262,6 @@ class Group{
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
-
-
-
-
   public function Save(){
 	 if ($this->id == NULL){  		//new group
 		// SQL INSERT
@@ -282,8 +279,6 @@ class Group{
 		return true;
 	}
 }
-
-
   public function find($id){
       $query = "SELECT * FROM `GROUP` WHERE `gid`=$id;";
       $result = mysql_query($query);
@@ -299,9 +294,6 @@ class Group{
           }
       }
   }
-
-
-
   public function getCount($gid){
       $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
 	  $result = mysql_query($query);
@@ -355,7 +347,6 @@ class Group{
 }
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
-
   public function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		$this->name = $name;
 		$this->type = $type;
@@ -410,7 +401,6 @@ class Trip{
 	}
   }
 }
-
 
 class Location{
   public $id, $name, $trip_id, $city_id, $next, $next_traffic;
