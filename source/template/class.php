@@ -217,10 +217,7 @@ class Traveller{
   }
 }
 class Group{
-<<<<<<< HEAD
 
-=======
->>>>>>> 92a21fd98685b0f84bcdcb0cdf67b88b83b04393
   const accepted = '已接受';
   const declined = '已拒絕';
   const new_invite = '尚未接受';
@@ -230,11 +227,10 @@ class Group{
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 92a21fd98685b0f84bcdcb0cdf67b88b83b04393
+
+
   public function Save(){
 	 if ($this->id == NULL){  		//new group
 		// SQL INSERT
@@ -251,16 +247,11 @@ class Group{
 	}else{
 		return true;
 	}
-<<<<<<< HEAD
+}
 
-  function find($id){
-      $query = "SELECT * FROM `GROUP` WHERE gid=$id";
 
-=======
-  }
   public function find($id){
       $query = "SELECT * FROM GROUP WHERE gid=$id;";
->>>>>>> 92a21fd98685b0f84bcdcb0cdf67b88b83b04393
       $result = mysql_query($query);
       if (!$result){
           return false;
@@ -274,10 +265,9 @@ class Group{
           }
       }
   }
-<<<<<<< HEAD
-}
-=======
->>>>>>> 92a21fd98685b0f84bcdcb0cdf67b88b83b04393
+
+
+
   public function getCount($gid){
       $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
 	  $result = mysql_query($query);
