@@ -713,7 +713,11 @@
 			<real>8</real>
 		</dict>
 		<dict>
+			<key>doneSeconds</key>
+			<real>28800</real>
 			<key>effort</key>
+			<real>28800</real>
+			<key>effortDone</key>
 			<real>28800</real>
 			<key>forcedStart</key>
 			<string>20110117200000</string>
@@ -721,6 +725,8 @@
 			<integer>14</integer>
 			<key>task</key>
 			<string>new group</string>
+			<key>workDone</key>
+			<real>8</real>
 			<key>workSeconds</key>
 			<real>28800</real>
 			<key>workTime</key>
@@ -886,7 +892,7 @@
 		<integer>-1</integer>
 	</array>
 	<key>uuid</key>
-	<string>8D42C735-4564-4C01-9CD8-918427D371B1</string>
+	<string>27578A54-D40A-421E-A6D8-FA455B85FFE3</string>
 	<key>version</key>
 	<integer>2</integer>
 </dict>

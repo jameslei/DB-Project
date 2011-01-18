@@ -86,7 +86,7 @@ footer p{
   margin: auto;
   padding: 10px;
 }
-#signup, #newgroup{
+#signup, #newgroup, div.center{
   position: relative;
   top: 100px;
   margin: auto;

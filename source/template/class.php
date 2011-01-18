@@ -240,7 +240,7 @@ class Group{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $group = new Group($row[1], $row[2], $row[3]);
+              $group = new Group($row[1], $row[2], $row[3]);  //name, description, uid
               $group->id = $row[0];
               return $group;
           }else{
@@ -255,13 +255,14 @@ class Group{
           return false;
       }else{
           while ($row = mysql_fetch_row($result)){
-              $member[] = Traveller::find($row[0]);
+              $member[] = Traveller::find($row[0]);  
+				//member array contains traveller objects
           }
           return $member;
       }
   }
   public function new_member($uid){
-      $query = "INSERT INTO `GROUP_TRAVELLER` (`gid`, `uid`, `invite_status`) VALUES (\'$this->id\', \'$uid\', \'".$this::new_invite."\');";
+      $query = "INSERT INTO `GROUP_TRAVELLER` (`gid`, `uid`, `invite_status`) VALUES (\'$this->id\', \'$uid\', \'".$this::accepted."\');";
       $result = mysql_query($query);
       return (!$result)? false : true;
   }
@@ -272,6 +273,20 @@ class Group{
   }
   public function creator(){
       return Traveller::find($this->creator_id);
+  }
+  public function get_all_trip(){
+	// $id = $this->id;
+	$query = "SELECT `tid` FROM `TRIP` WHERE `belongs_to` = 'group' AND `owner_id` = $this->id;";
+	$result = mysql_query($query);
+	if(!$result){
+		return false;
+	}else{
+		 while ($row = mysql_fetch_row($result)){
+              $trip_list[] = Trip::find($row[0]);  
+				//trip_list array contains trip objects
+		 }
+		 return $trip_list;
+	}
   }
 }
 class Trip{
