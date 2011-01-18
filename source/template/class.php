@@ -143,6 +143,23 @@ class Traveller{
           echo "update";
       }
   }
+  public function find_by_uname($uname){
+	  $query = "SELECT * from TRAVELLER WHERE name='$uname'";
+	  // echo $query;
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $traveller = new Traveller($row[1], $row[2], $row[3], $row[4]);
+              $traveller->id = $row[0];
+			  // print_r($traveller);
+              return $traveller;
+          }else{
+              return NULL;
+          }
+      }
+  }
   public function find($id){
       $query = "SELECT * from TRAVELLER WHERE uid='$id'";
       $result = mysql_query($query);
