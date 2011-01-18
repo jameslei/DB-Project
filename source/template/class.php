@@ -158,20 +158,27 @@ class Traveller{
           }
       }
   }
-  public function getCity($id){
-      $query = "SELECT * from CITY WHERE cid='$id'";
+  public function getCity($uid){
+      $query = "SELECT * from CITY, TRAVELLER_CITY WHERE TRAVELLER_CITY.uid='$uid' AND CITY.cid=TRAVELLER_CITY.cid";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      echo "City : ".$row[1]."<br/>";
-			  echo "Country : ".$row[2]."<br/>";
+		      $city = new City($row[0], $row[1], $row[2]);
+			  $c_array[] = $city;
 		  }
-	  }  
+		  if ($c_array!=NULL){
+		      return $c_array;
+		  }else{
+		      return NULL;
+	      }  
+      }
   }
+  //public function getFavor($uid){
+      //$query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$
   public function getTrip($uid){
-      $query = "SELECT * from TRIP WHERE belongs_to='group' AND owner_id = 'uid'";
+      $query = "SELECT * from TRIP WHERE belongs_to='traveller' AND owner_id = '$uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
@@ -188,44 +195,72 @@ class Traveller{
 	  }  
   }
   public function getGroup($uid){
-      $query = "SELECT * from GROUP WHERE user_id='$uid'";
+      //$query = "SELECT name, count(*) FROM (SELECT * FROM GROUP JOIN GROUP_TRAVELLER GROUP_TRAVELLER.gid = GROUP.gid) WHERE GROUP_TRAVELLER.uid = '$uid'";
+	  $query = "SELECT * FROM `GROUP`, `GROUP_TRAVELLER` WHERE `GROUP_TRAVELLER`.uid=$uid AND `GROUP_TRAVELLER`.gid=`GROUP`.gid";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      $group = new Group;
-		      $group->id = $row[0];
-			  $group->name = $row[1];
-			  $group->description = $row[2];
-			  $group->user_id = $row[3];
+		      $group = new Group($row[0], $row[1], $row[2], $row[3]);
 			  $g_array[] = $group;
 		  }
-		  return $g_array;
+		  if ($g_array!=NULL){
+		      return $g_array;
+		  }else{
+		      return NULL;
+		  }
 	  }  
   }
 }
 class Group{
   public $id, $name, $description, $user_id;
-  function Group($name, $description, $user_id){
+  function Group($id, $name, $description, $user_id){
+      $this->id = $id;
       $this->name = $name;
       $this->description = $description;
       $this->user_id = $user_id;
   }
+    public function Save(){      			//save trip  create new or alter existing
+	if ($this->id == NULL){  		//new trip
+		// SQL INSERT
+		$query = "INSERT INTO group(name, description, user_id) VALUES('$this->name','$this->description','$this->user_id');";
+		$result = mysql_query($query);
+
+	}else{  						//existing trip
+		// SQL UPDATE
+		$query = "UPDATE group SET name='$this->name', type='$this->description', time='$this->user_id';";
+		$result = mysql_query($query);
+	}
+	if(!$result){
+		return false;	
+	}else{
+		return true;
+	}
+  }
   public function find($id){
-      $query = "SELECT * from GROUP WHERE gid='$id'";
+      $query = "SELECT * FROM GROUP WHERE gid=$id;";
       $result = mysql_query($query);
       if (!$result){
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $group = new Group($row[1], $row[2], $row[3]);
-              $group->id = $row[0];
+              $group = new Group($row[0], $row[1], $row[2], $row[3]);
               return $group;
           }else{
               return NULL;
           }
       }
+  }
+  public function getCount($gid){
+      $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
+	  $result = mysql_query($query);
+	  $rows = mysql_num_rows($result);
+	  if(!result){
+	      return false;
+	  }else{
+	      return $rows;
+	  }
   }
 }
 class Trip{
@@ -369,10 +404,11 @@ class Favorite{
   }
 }
 class City{
-  public $id, $name, $country;
-  function City($name, $country){
-      $this->name = $name;
+  public $country, $name, $id;
+  function City($country, $name, $id){
       $this->country = $country;
+	  $this->name = $name;
+	  $this->id = $id;         
   }
   public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
@@ -381,8 +417,7 @@ class City{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $city = new City($row[1], $row[0]);
-              $city->id = $row[2];
+              $city = new City($row[0], $row[1], $row[2]);
               return $city;
           }else{
               return NULL;
