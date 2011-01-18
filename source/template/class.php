@@ -175,26 +175,35 @@ class Traveller{
           }
       }
   }
-  public function getCity($id){
-      $query = "SELECT * from CITY WHERE cid='$id'";
+  public function getCity($uid){
+      $query = "SELECT * from CITY, TRAVELLER_CITY WHERE TRAVELLER_CITY.uid='$uid' AND CITY.cid=TRAVELLER_CITY.cid";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      echo "City : ".$row[1]."<br/>";
-			  echo "Country : ".$row[2]."<br/>";
+		      $city = new City($row[0], $row[1], $row[2]);
+			  $c_array[] = $city;
 		  }
-	  }  
+		  if ($c_array!=NULL){
+		      return $c_array;
+		  }else{
+		      return NULL;
+	      }  
+      }
   }
+  //public function getFavor($uid){
+  //    $query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
+	//  }
   public function getTrip($uid){
-      $query = "SELECT * from TRIP WHERE belongs_to='group' AND owner_id = 'uid'";
+      $query = "SELECT * from TRIP WHERE belongs_to='traveller' AND owner_id = '$uid'";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-              $trip = new Trip($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
+              $trip = new Trip($row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
+              $trip->id = $row[0];
 			  $t_array[] = $trip;
 		  }
 		  if ($t_array!=NULL){ 		      
@@ -205,24 +214,27 @@ class Traveller{
 	  }  
   }
   public function getGroup($uid){
-      $query = "SELECT * from GROUP WHERE user_id='$uid'";
+      //$query = "SELECT name, count(*) FROM (SELECT * FROM GROUP JOIN GROUP_TRAVELLER GROUP_TRAVELLER.gid = GROUP.gid) WHERE GROUP_TRAVELLER.uid = '$uid'";
+	  $query = "SELECT * FROM `GROUP`, `GROUP_TRAVELLER` WHERE `GROUP_TRAVELLER`.uid=$uid AND `GROUP_TRAVELLER`.gid=`GROUP`.gid";
 	  $result = mysql_query($query);
 	  if(!$result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      $group = new Group;
+		      $group = new Group($row[1], $row[2], $row[3]);
 		      $group->id = $row[0];
-			  $group->name = $row[1];
-			  $group->description = $row[2];
-			  $group->user_id = $row[3];
 			  $g_array[] = $group;
 		  }
-		  return $g_array;
+		  if ($g_array!=NULL){
+		      return $g_array;
+		  }else{
+		      return NULL;
+		  }
 	  }  
   }
 }
 class Group{
+
   const accepted = '已接受';
   const declined = '已拒絕';
   const new_invite = '尚未接受';
@@ -232,6 +244,10 @@ class Group{
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
+
+
+
+
   public function Save(){
 	 if ($this->id == NULL){  		//new group
 		// SQL INSERT
@@ -248,10 +264,11 @@ class Group{
 	}else{
 		return true;
 	}
-	
 }
-  function find($id){
-      $query = "SELECT * FROM `GROUP` WHERE gid=$id";
+
+
+  public function find($id){
+      $query = "SELECT * FROM GROUP WHERE gid=$id;";
       $result = mysql_query($query);
       if (!$result){
           return false;
@@ -264,6 +281,19 @@ class Group{
               return NULL;
           }
       }
+  }
+
+
+
+  public function getCount($gid){
+      $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
+	  $result = mysql_query($query);
+	  $rows = mysql_num_rows($result);
+	  if(!result){
+	      return false;
+	  }else{
+	      return $rows;
+	  }
   }
   public function members(){
       $query = "SELECT `TRAVELLER`.`uid` FROM `GROUP_TRAVELLER`, `TRAVELLER` where `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid`=`TRAVELLER`.`uid`;";
@@ -309,8 +339,7 @@ class Group{
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
 
-  function Trip( $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
-		// $this->id = $id;    manual add id
+  public function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		$this->name = $name;
 		$this->type = $type;
 		$this->time = $time;
@@ -320,7 +349,6 @@ class Trip{
   }
 
   public function Save(){      			//save trip  create new or alter existing
-
 	if ($this->id == NULL){  		//new trip
 		// SQL INSERT
 		$query = "INSERT INTO trip(name, type, time, status, belongs_to, owner_id) VALUES('$this->name','$this->type','$this->time','$this->status','$this->belongs_to','$this->owner_id');";
@@ -338,7 +366,7 @@ class Trip{
 	}
   }
 
-  function get_days(){
+  public function get_days(){
 	$trip = Trip::find($this->id);
 	$query = "SELECT * FROM DAY WHERE tid=$this->id ;";
 	$result = mysql_query($query);
@@ -484,9 +512,8 @@ class City{
   public $id, $name, $country;
   function City($name, $country){
       $this->name = $name;
-      $this->country = $country;
+      $this->country = Country::find($country);
   }
-
   public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
       $result = mysql_query($query);
@@ -502,18 +529,31 @@ class City{
           }
       }
   }
+  public function save(){
+    $country = $this->country;
+  	if ($this->id == NULL){
+  		$query = "INSERT INTO `Travel Journal`.`CITY` (`country_id`, `name`, `cid`) VALUES ('$country->id', '$this->name', NULL);";
+  	}else{
+  		$query = "UPDATE `Travel Journal`.`CITY` SET `country_id` = '$country->id', `name` = '$this->name' WHERE `CITY`.`cid` = $this->id;";
+  	}
+  	$result = mysql_query($query);
+  	return (!$result) ? false : true;
+  }
 }
 class Country{
-  public $name;
-
-  public function find($name){
-      $query = "SELECT * from COUNTRY WHERE name='$name'";
+  public $name, $id;
+  public function Country($name){
+      $this->name = $name;
+  }
+  public function find($id){
+      $query = "SELECT * from COUNTRY WHERE country_id='$id'";
       $result = mysql_query($query);
       if (!$result){
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $country->name = $row[0];
+              $country = new Country($row[1]);
+              $country->id = $row[0];
               return $country;
           }else{
               return NULL;

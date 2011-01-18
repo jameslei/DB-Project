@@ -78,7 +78,7 @@ footer p{
   font-size: 10px;
   padding: 3px;
 }
-
+/*
 #login, #newtrip{
   position: relative;
   top: 100px;
@@ -86,7 +86,8 @@ footer p{
   margin: auto;
   padding: 10px;
 }
-#signup, #newgroup, div.center{
+#signup, #newgroup, */
+article>div{
   position: relative;
   top: 100px;
   margin: auto;
@@ -117,6 +118,7 @@ footer p{
 }
 .welcome a, .welcome a:link, .welcome a:visited, .welcome a:active  {color: #EF3C00;}
 .welcome a:hover                                                    {color: #C95F09;}
+#dashboard        { top:0;}
 #dashboard h1{
   display: block;
   border-radius: 10px 10px 0 10px;

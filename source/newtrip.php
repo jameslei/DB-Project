@@ -1,7 +1,7 @@
 <?php require_once "template/header.php"; ?>
 <?php
 	$id = $_GET["id"];
-	$belongs_to = $_GET["belongs_to"]
+	$belongs_to = $_GET["belongs_to"];
 	
 ?>
 <div id="newtrip">
