@@ -409,7 +409,7 @@ class Day{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $day = new Day($row[1], $row[3]);
+              $day = new Day($row[1], $row[2], $row[3]);
               $day->id = $row[0];
               return $day;
           }else{
