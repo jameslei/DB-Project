@@ -17,5 +17,5 @@
 	
 
 ?>
-<a>hi</a>
+<!-- <a>hi</a> -->
 <?php mysql_close($db_server);?>

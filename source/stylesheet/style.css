@@ -79,14 +79,14 @@ footer p{
   padding: 3px;
 }
 
-#login{
+#login, #newtrip{
   position: relative;
   top: 100px;
   width: 300px;
   margin: auto;
   padding: 10px;
 }
-#signup{
+#signup, #newgroup, div.center{
   position: relative;
   top: 100px;
   margin: auto;
@@ -117,3 +117,23 @@ footer p{
 }
 .welcome a, .welcome a:link, .welcome a:visited, .welcome a:active  {color: #EF3C00;}
 .welcome a:hover                                                    {color: #C95F09;}
+#dashboard h1{
+  display: block;
+  border-radius: 10px 10px 0 10px;
+  background: #354242;
+  color: #E7FF60;
+  padding: 5px 10px;
+  max-width:50px;
+}
+#dashboard table  { margin:0; width: 100%;}
+#dashboard th     { color: #293232; background: #C0D060; border-radius: 10px 10px 0 0;}
+#dashboard>div    { padding: 10px;}
+#dashboard .left  { border:0; float: left; clear: both;}
+#dashboard .right { border:0; float: right; clear: right;}
+#dashboard ul     { float: right; background: #fff; border-radius:0 0 0 10px;}
+#dashboard li     { padding: 5px; list-style: none; float: left;}
+#dashboard li a   { color: #293232;}
+#dashboard li a:hover{ color: #000;}
+.sixty               { width: 60%;}
+.thirty              { width: 30%;}
+.forty-five          { width: 45%;}
