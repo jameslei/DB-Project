@@ -5,7 +5,7 @@
 <p class="welcome">你好! <?php echo $user->traveller->name; ?>, 你可以按此<a href="logout.php">登出</a>.</p>
 
 <div id="dashboard">
- <div id="trip" class="left">
+ <div id="trip" class="forty-five left">
 <h1>旅程</h1>
 <?php 
 
@@ -48,7 +48,7 @@ if($trip_array!=NULL){
 </ul>
  </div>
 
-<div id="group" class="right">
+<div id="group" class="forty-five right">
 <h1>群組</h1>
 <?php
 //還有問題:找出來的如果是group就無法顯示,group_traveller就可以超怪
@@ -90,7 +90,7 @@ if($group_array!=NULL){
 </ul>
 </div>
 
-<div id="city" class="left">
+<div id="city" class="forty-five left">
 <h1>城市</h1>
 <?php
 $city_array = Traveller::getCity($uid);
@@ -98,13 +98,13 @@ $k = 1;
 if($city_array!=NULL){
     echo "<table>";
 	echo "<tr>";
-    echo "<th>你曾到達的國家</th>";
-	echo "<th>城市</th>";
+    echo "<th>你曾到達的城市</th>";
+	echo "<th>日期</th>";
 	echo "</tr>";
     foreach ($city_array as $city_list){
 		echo "<tr>";
-		echo "<td>$city_list->country</td>";
 		echo "<td>$city_list->name</td>";
+		//echo "<td>$city_list->name</td>";
 		//echo "<a href = trip.php?id=$t_id > ";
 		//echo "$city_list->city";
 	    //echo "</a>";
@@ -118,25 +118,38 @@ if($city_array!=NULL){
 }
 ?>
 </div>
-<div align="right">
-<br/><br/>
+
+<div id="favorite" class="forty-five right">
+<h1>♥</h1>
 <b>My Favorite things : </b><br/><br/>
 <?php
-$query = "SELECT time, name FROM FAV_THING WHERE uid='$user->id";
-$result = mysql_query($query);
-if($result != NULL){	
-	//echo "I have been to : <br/>";
-    if (!$result){
-        return false;
-    }else{
-        while($row = mysql_fetch_row($result)){
-		  	echo "City : ".$row[0]."<br/>";
-		  	echo "Country : ".$row[1]."<br/><br/><br/>";
-        }			
+$favor_array = Traveller::getFavor($uid);
+if($favor_array!=NULL){
+    echo "<table>";
+	echo "<tr>";
+    echo "<th>名字</th>";
+	echo "<th>時間</th>";
+	echo "<th>地點</th>";
+	echo "<th>備註</th>";
+	echo "</tr>";
+    foreach ($favor_array as $favor_list){
+		echo "<tr>";
+        echo "<td>$favor_list->name</td>";
+		echo "<td>$favor_list->time</td>";
+        echo "<td>$favor_list->lid</td>";
+		echo "<td>$favor_list->note</td>";
+		echo "</tr>";
     }
+	echo "</table>";
 }else{
     echo "尚無資料";
 }
 ?>
+<ul>
+   <li><a href="#">新增</a></li>
+   <li><a href="#">更多</a></li>
+</ul> 
+</div>
 
+</div>
 <?php require_once "template/footer.php"; ?>

@@ -192,9 +192,26 @@ class Traveller{
 	      }  
       }
   }
-  //public function getFavor($uid){
-  //    $query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
-	//  }
+  public function getFavor($uid){
+      $query = "SELECT * from FAV_THING, TRAVELLER, TRIP, LOCATION WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
+	  $result = mysql_query($query);
+	  if(!result){
+	      return false;
+	  }else{
+	      while($row = mysql_fetch_row($result)){
+		      $favor = new Favorite($row[1], $row[2], $row[3], $row[4], $row[5]);
+			  $favor->id = $row[0];
+			  $f_array[] = $favor;
+		  }
+		  if(f_array!=NULL){
+		      return $f_array;
+		  }else{
+		      return NULL;
+		  }
+	  }
+  }
+		  
+	  
   public function getTrip($uid){
       $query = "SELECT * from TRIP WHERE belongs_to='traveller' AND owner_id = '$uid'";
 	  $result = mysql_query($query);
