@@ -176,7 +176,8 @@ class Traveller{
       }
   }
   //public function getFavor($uid){
-      //$query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$
+  //    $query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
+	//  }
   public function getTrip($uid){
       $query = "SELECT * from TRIP WHERE belongs_to='traveller' AND owner_id = '$uid'";
 	  $result = mysql_query($query);
@@ -214,32 +215,18 @@ class Traveller{
   }
 }
 class Group{
-<<<<<<< HEAD
-  public $id, $name, $description, $user_id;
-  function Group($id, $name, $description, $user_id){
-      $this->id = $id;
-=======
+
   const accepted = '已接受';
   const declined = '已拒絕';
   const new_invite = '尚未接受';
   public $id, $name, $description, $creator_id;  //creator_id在DB裡叫做uid喔
   function Group($name, $description, $creator_id){
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
       $this->name = $name;
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
-<<<<<<< HEAD
-    public function Save(){      			//save trip  create new or alter existing
-	if ($this->id == NULL){  		//new trip
-		// SQL INSERT
-		$query = "INSERT INTO group(name, description, user_id) VALUES('$this->name','$this->description','$this->user_id');";
-		$result = mysql_query($query);
 
-	}else{  						//existing trip
-		// SQL UPDATE
-		$query = "UPDATE group SET name='$this->name', type='$this->description', time='$this->user_id';";
-=======
+
   public function Save(){
 	 if ($this->id == NULL){  		//new group
 		// SQL INSERT
@@ -249,7 +236,6 @@ class Group{
 	}else{  						//existing group
 		// SQL UPDATE
 		$query = "UPDATE `group` SET name='$this->name', description='$this->description', uid='$this->creator_id' WHERE id='$this->id';";
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
 		$result = mysql_query($query);
 	}
 	if(!$result){
@@ -257,34 +243,24 @@ class Group{
 	}else{
 		return true;
 	}
-<<<<<<< HEAD
-  }
-  public function find($id){
-      $query = "SELECT * FROM GROUP WHERE gid=$id;";
-=======
-	
-}
+
   function find($id){
       $query = "SELECT * FROM `GROUP` WHERE gid=$id";
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
+
       $result = mysql_query($query);
       if (!$result){
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-<<<<<<< HEAD
-              $group = new Group($row[0], $row[1], $row[2], $row[3]);
-=======
               $group = new Group($row[1], $row[2], $row[3]);  //name, description, uid
               $group->id = $row[0];
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
               return $group;
           }else{
               return NULL;
           }
       }
   }
-<<<<<<< HEAD
+}
   public function getCount($gid){
       $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
 	  $result = mysql_query($query);
@@ -294,7 +270,7 @@ class Group{
 	  }else{
 	      return $rows;
 	  }
-=======
+  }
   public function members(){
       $query = "SELECT `TRAVELLER`.`uid` FROM `GROUP_TRAVELLER`, `TRAVELLER` where `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid`=`TRAVELLER`.`uid`;";
       $result = mysql_query($query);
@@ -334,7 +310,6 @@ class Group{
 		 }
 		 return $trip_list;
 	}
->>>>>>> 3cba8fca8fbd4d411148c26aa503f54dfd9967fd
   }
 }
 class Trip{
