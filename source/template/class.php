@@ -285,7 +285,7 @@ class Group{
 
 
   public function find($id){
-      $query = "SELECT * FROM GROUP WHERE gid=$id;";
+      $query = "SELECT * FROM `GROUP` WHERE `gid`=$id;";
       $result = mysql_query($query);
       if (!$result){
           return false;

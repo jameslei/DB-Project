@@ -1,5 +1,4 @@
 <?php require_once "template/header.php"; ?>
-
 <?php
 	$id = $_GET["id"];
 	$group = Group::find($id);  //rerutn group object(id, name, description, uid)
@@ -22,7 +21,7 @@
 			<td class = "left">群組成員</td>
 			<td class = "right"><?php foreach($member_list as $item){
 				echo $item->name."<br/>";
-			}?><br/><a href = "invite.php?id=$id">邀請新成員</a></td>
+			}?><br/><a href = "invite.php?id=<?php echo $id?>">邀請新成員</a></td>
 		</tr>
 		<tr>
 			<td class = "left">群組簡介</td>
