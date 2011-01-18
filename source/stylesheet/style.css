@@ -118,6 +118,7 @@ article>div{
 }
 .welcome a, .welcome a:link, .welcome a:visited, .welcome a:active  {color: #EF3C00;}
 .welcome a:hover                                                    {color: #C95F09;}
+#dashboard        { top:0;}
 #dashboard h1{
   display: block;
   border-radius: 10px 10px 0 10px;

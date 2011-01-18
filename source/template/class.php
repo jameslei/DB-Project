@@ -184,7 +184,8 @@ class Traveller{
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-              $trip = new Trip($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
+              $trip = new Trip($row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
+              $trip->id = $row[0];
 			  $t_array[] = $trip;
 		  }
 		  if ($t_array!=NULL){ 		      
@@ -202,7 +203,8 @@ class Traveller{
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
-		      $group = new Group($row[0], $row[1], $row[2], $row[3]);
+		      $group = new Group($row[1], $row[2], $row[3]);
+		      $group->id = $row[0];
 			  $g_array[] = $group;
 		  }
 		  if ($g_array!=NULL){
@@ -309,8 +311,7 @@ class Group{
 class Trip{
   public $id, $name, $type, $time, $status, $belongs_to, $owner_id;
 
-  function Trip( $name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
-		// $this->id = $id;    manual add id
+  public function Trip($name, $type, $time, $status, $belongs_to, $owner_id){  //create trip
 		$this->name = $name;
 		$this->type = $type;
 		$this->time = $time;
@@ -320,7 +321,6 @@ class Trip{
   }
 
   public function Save(){      			//save trip  create new or alter existing
-
 	if ($this->id == NULL){  		//new trip
 		// SQL INSERT
 		$query = "INSERT INTO trip(name, type, time, status, belongs_to, owner_id) VALUES('$this->name','$this->type','$this->time','$this->status','$this->belongs_to','$this->owner_id');";
@@ -338,7 +338,7 @@ class Trip{
 	}
   }
 
-  function get_days(){
+  public function get_days(){
 	$trip = Trip::find($this->id);
 	$query = "SELECT * FROM DAY WHERE tid=$this->id ;";
 	$result = mysql_query($query);
