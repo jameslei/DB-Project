@@ -759,7 +759,11 @@
 			<real>8</real>
 		</dict>
 		<dict>
+			<key>doneSeconds</key>
+			<real>28800</real>
 			<key>effort</key>
+			<real>28800</real>
+			<key>effortDone</key>
 			<real>28800</real>
 			<key>forcedStart</key>
 			<string>20110118170000</string>
@@ -776,6 +780,8 @@
 			</array>
 			<key>task</key>
 			<string>group</string>
+			<key>workDone</key>
+			<real>8</real>
 			<key>workSeconds</key>
 			<real>28800</real>
 			<key>workTime</key>
@@ -834,7 +840,11 @@
 			<real>8</real>
 		</dict>
 		<dict>
+			<key>doneSeconds</key>
+			<real>28800</real>
 			<key>effort</key>
+			<real>28800</real>
+			<key>effortDone</key>
 			<real>28800</real>
 			<key>forcedStart</key>
 			<string>20110118120000</string>
@@ -851,6 +861,8 @@
 			</array>
 			<key>task</key>
 			<string>invite</string>
+			<key>workDone</key>
+			<real>8</real>
 			<key>workSeconds</key>
 			<real>28800</real>
 			<key>workTime</key>

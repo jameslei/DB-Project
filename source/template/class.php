@@ -143,6 +143,23 @@ class Traveller{
           echo "update";
       }
   }
+  public function find_by_uname($uname){
+	  $query = "SELECT * from TRAVELLER WHERE name='$uname'";
+	  // echo $query;
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $traveller = new Traveller($row[1], $row[2], $row[3], $row[4]);
+              $traveller->id = $row[0];
+			  // print_r($traveller);
+              return $traveller;
+          }else{
+              return NULL;
+          }
+      }
+  }
   public function find($id){
       $query = "SELECT * from TRAVELLER WHERE uid='$id'";
       $result = mysql_query($query);
@@ -176,7 +193,8 @@ class Traveller{
       }
   }
   //public function getFavor($uid){
-      //$query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$
+  //    $query = "SELECT * from TRAVELLER, TRIP, LOCATION, FAV_THING WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
+	//  }
   public function getTrip($uid){
       $query = "SELECT * from TRIP WHERE belongs_to='traveller' AND owner_id = '$uid'";
 	  $result = mysql_query($query);
@@ -216,6 +234,7 @@ class Traveller{
   }
 }
 class Group{
+
   const accepted = '已接受';
   const declined = '已拒絕';
   const new_invite = '尚未接受';
@@ -225,6 +244,10 @@ class Group{
       $this->description = $description;
       $this->creator_id = $creator_id;
   }
+
+
+
+
   public function Save(){
 	 if ($this->id == NULL){  		//new group
 		// SQL INSERT
@@ -241,7 +264,9 @@ class Group{
 	}else{
 		return true;
 	}
-  }
+}
+
+
   public function find($id){
       $query = "SELECT * FROM GROUP WHERE gid=$id;";
       $result = mysql_query($query);
@@ -257,6 +282,9 @@ class Group{
           }
       }
   }
+
+
+
   public function getCount($gid){
       $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
 	  $result = mysql_query($query);

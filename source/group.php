@@ -22,7 +22,7 @@
 			<td class = "left">群組成員</td>
 			<td class = "right"><?php foreach($member_list as $item){
 				echo $item->name."<br/>";
-			}?><br/><a href = "invite.php">邀請新成員</a></td>
+			}?><br/><a href = "invite.php?id=$id">邀請新成員</a></td>
 		</tr>
 		<tr>
 			<td class = "left">群組簡介</td>
@@ -34,6 +34,9 @@
 				echo "<a href=trip.php?id=$item->id>".$item->name."</a><br/>";
 			}?><br/><a href = "newtrip.php?id=<?php echo $id;?>&belongs_to=group">新增一個旅程</a></td>
 		</tr>
+		<tr class="foot">
+                <td colspan="2"></td>
+        </tr>
 	</table>
 	
 </div>
