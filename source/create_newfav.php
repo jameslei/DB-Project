@@ -11,7 +11,7 @@
 	   $description = $_POST['description'];
        $type = $_POST['radio'];
     
-       $fav = new Favorite($name, $time, $type, $description, $lid);
+       $fav = new Favorite($name, $datetime, $type, $description, $lid);
 	   if ($fav->save()){
 			header("location: day.php?id=$day->id");
 		}
