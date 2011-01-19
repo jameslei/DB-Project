@@ -17,7 +17,7 @@
             <!-- display the days of the trip -->
             <?php while($day!=NULL){?>
             <tr>
-                <td><?php echo $day->date; ?></td>
+                <td><a href="day.php?id=<?php echo $day->id;?>"><?php echo $day->date; ?></a></td>
                 <td></td>
                 <td></td>
             </tr>

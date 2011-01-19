@@ -1,5 +1,30 @@
 <?php require_once "template/header.php"; ?>
-<?php $cities = City::all(); ?>
+<?php
+      $day = Day::find($_GET['id']);
+      
+
+?>
+<div id="dashboard">
+    <div class="sixty left">
+        <table>
+            <tr>
+                <th class="head"><?php echo $day->date;?></th>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div class="thirty right">
+        <table>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<!-- <?php $cities = City::all(); ?>
 <div id="newtrip">
     <form id="form1" method="post" action="create_day.php?id=<?php echo $_GET['id'];?>">
         <table>
@@ -13,8 +38,8 @@
                     <?php foreach($cities as $city){
                         echo "<option value=".$city->id.">".$city->name."</option>";
                     }?>
-        		    </select>
-        		</td>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>住在</td>
@@ -26,10 +51,10 @@
             </tr>
             <tr>
                 <td colspan="2">
-          	        <input type="submit" name="submit" id="submit" value="submit" />                                                  
+                    <input type="submit" name="submit" id="submit" value="submit" />                                                  
                     <input type="reset" name="Reset" id="reset" value="reset" /></td>
             </tr>
         </table>
-	</form>
-</div>
+    </form>
+</div> -->
 <?php require_once "template/footer.php"; ?>

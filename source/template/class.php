@@ -396,7 +396,7 @@ class Trip{
       $new_day = new Day($date, NULL, $this->id);
       if ($new_day->save()){
           $days = $this->get_days();
-          if ($days!=NULL){
+          if (count($days)>1){
               $last_day = $days[count($days)-2];
               $last_day->next = $new_day;
               if ($last_day->save()){
