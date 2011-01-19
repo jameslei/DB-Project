@@ -1,4 +1,4 @@
-<?php require_once "template/header.php"; ?>
+﻿<?php require_once "template/header.php"; ?>
 <?php
 	$id = $_GET["id"];
 	$trip = Trip::find($id);
