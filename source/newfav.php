@@ -1,4 +1,4 @@
-<?php require_once "template/header.php"; ?>
+Ôªø<?php require_once "template/header.php"; ?>
 
 <?php
 	$user = Account::find($_SESSION['aid']);
@@ -10,22 +10,22 @@
 	<form id="form1" method="post" action="<?php echo "create_newfav.php?"?>">
 	  <table>
 		<tr > 
-	        <th colspan="2" class="head">∑sºW</th> 
+	        <th colspan="2" class="head">Êñ∞Â¢û</th> 
 	    </tr>
 	  	<tr>
-			<td class="left">¶W∫Ÿ</td>
+			<td class="left">ÂêçÁ®±</td>
 			<td class="right"><input type="text" name="name" id="name"></td>
 	  	</tr>
 	    <tr>
-		    <td class="left">§È¥¡ : </td>
+		    <td class="left">Êó•Êúü : </td>
 		    <td class="right"><input type="date" name="new_date" ></td>
 	    </tr>
 	  	<tr>
-			<td class="left">√˛´¨</td>
+			<td class="left">È°ûÂûã</td>
 			<td class="right"><input type="text" name="type" id="type"></td>
 	  	</tr>
     	<tr>
-	        <td class="left">¶a¬I : </td>
+	        <td class="left">Âú∞Èªû : </td>
 			<td class="right">
 		    <select name="location" id="location">
 		    <?php
@@ -40,12 +40,12 @@
 			</td>
 		</tr>
 	  	<tr>
-			<td class="left">¥y≠z</td>
+			<td class="left">ÊèèËø∞</td>
 	    	<td class="right"><textarea name="description" id="description" cols="45" rows="5"></textarea></td>                    
 	  	</tr>
 	    <tr class="foot"> 
-	        <td colspan="2"><input type="submit" name="submit" id="submit" value="∑sºW" />                                                  
-	        <input type="reset" name="Reset" id="reset" value="≠´≥]" /></td> 
+	        <td colspan="2"><input type="submit" name="submit" id="submit" value="Êñ∞Â¢û" />                                                  
+	        <input type="reset" name="Reset" id="reset" value="ÈáçË®≠" /></td> 
 	    </tr>
 
 	  </table>
