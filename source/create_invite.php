@@ -7,12 +7,12 @@
 	$traveller = Traveller::find_by_uname($uname);    //user object
 	// print_r($traveller);
 	if (!$traveller){
-		echo "no such user";
+		echo "<div class = \"center\">沒有這個人！";
 	}else{
 		$result = $group->new_member($traveller->id);
-		echo "done!";
+		echo "<div class = \"center\">加好了！";
 	}
 ?>
-<br/>
+<br/></div>
 <a href="group.php?id=<?php echo $id ?>">back to group</a>
 <?php require_once "template/footer.php"; ?>

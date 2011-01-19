@@ -8,7 +8,7 @@
 	
 	
 ?>
-<h1><?php echo $trip->name ; ?></h1>
+<h1 align="center"><?php echo $trip->name ; ?></h1>
 <div id="dashboard">
     <div id="day" class="sixty left">
         <table>
@@ -47,12 +47,18 @@
     <div class="thirty right">
         <h1>成員</h1>
         <table>
-            <tr>
-                <td>李永裕</td>
-            </tr>
-            <tr>
-                <td>史繼中</td>
-            </tr>
+			<?php if ($trip->belongs_to=="traveller"){
+				     echo "<tr><td>".Traveller::find($trip->owner_id)->name."</td></tr>";
+			      }else{
+					 $group = Group::find($trip->owner_id);
+					 $member_list = $group->members();
+					 foreach($member_list as $item){
+					 	$traveller = Traveller::find($item->id);
+  						$name = $traveller->name;
+  						echo "<tr><td>".$name."</td></tr>";
+					 }
+					 
+				  }?>
         </table>
         <ul>
             <li><a href="#">更多...</a></li>
@@ -61,6 +67,11 @@
     <div class="thirty right">
         <h1>♥</h1>
         <table>
+			<tr>
+				<th>最愛</th>
+				<th>地點</th>
+				<th>心得</th>
+			</tr>
             <tr>
                 <td>豬扒包</td>
                 <td>澳門</td>
