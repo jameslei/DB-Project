@@ -559,6 +559,11 @@ class Day{
 		return $location;
 	}
   }
+  
+  public function add_location($name, $day, $cid){
+      $location = new Location($name, $day->id, $cid, NULL, NULL);
+  }
+  
   private function get_schedules(){     //all the schedule of this day in a array
 	$query = "SELECT * FROM SCHEDULE WHERE did=$this->id ORDER BY `time` ;";
 	$result = mysql_query($query);
@@ -567,7 +572,7 @@ class Day{
 	}else{
     	$count = 0;
     	while($row = mysql_fetch_row($result)){
-    		$schedules[] = new Schedule($row[1], $row[2], $row[3], $row[4]), $row[5]);
+    		$schedules[] = new Schedule($row[1], $row[2], $row[3], $row[4], $row[5]);
     		$schedules[$count++]->id = $row[0];
     	}
     	return $schedules;
@@ -581,7 +586,7 @@ class Day{
 		$num++;
 	}   //$num becomes the first schedule after the one to be added
 	$next = $all_schedules[$num]->id;
-	$schedule = new Schedule($time, $next, $place, $description, $did,);
+	$schedule = new Schedule($time, $next, $place, $description, $did);
 	$schedule->Save();
 	$all_schedules[--$num]->next = $schedule->id;
 	$all_schedules[$num]->Save();
@@ -589,12 +594,12 @@ class Day{
   }
   
   public function last_schedule(){
-	$all_schedules=$this->get_schedules;    // an array containing all schedule objects
+	$all_schedules=$this->get_schedules();    // an array containing all schedule objects
 	$num = sizeof($all_schedules)-1;
 	return $all_schedules[$num];
   }
   public function first_schedule(){
-	$all_schedules=$this->get_schedules;    // an array containing all schedule objects
+	$all_schedules=$this->get_schedules();    // an array containing all schedule objects
 	return $all_schedules[0];
   }
 }
