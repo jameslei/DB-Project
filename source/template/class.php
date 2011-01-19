@@ -450,6 +450,24 @@ class Location{
           }
       }
   }
+  public function getFavor($lid){
+      $query = "SELECT FAV_THING.fid, FAV_THING.name, FAV_THING.time, FAV_THING.type, FAV_THING.note, FAV_THING.lid from FAV_THING, LOCATION WHERE LOCATION.lid='$lid' AND LOCATION.lid=FAV_THING.lid";
+	  $result = mysql_query($query);
+	  if(!result){
+	      return false;
+	  }else{
+	      while($row = mysql_fetch_row($result)){
+		      $favor = new Favorite($row[1], $row[2], $row[3], $row[4], $row[5]);
+			  $favor->fid = $row[0];
+			  $f_array[] = $favor;
+		  }
+		  if(f_array!=NULL){
+		      return $f_array; 
+		  }else{
+		      return NULL;
+		  }
+	  }
+  }
 }
 class Day{
   public $id, $date, $next, $tid;

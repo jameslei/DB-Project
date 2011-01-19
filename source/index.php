@@ -22,7 +22,7 @@
 	            echo "<tr>";
 		        echo "<td>$trip_list->time</td>";
 		        echo "<td>";
-		        echo "<a href = trip.php?id=$t_id>";
+		        echo "<a href = trip.php?id=$trip_list->id>";
 		        echo "$trip_list->name";
 	            echo "</a>";
 		        echo "</td>";
@@ -123,7 +123,7 @@
         ?>
         <ul>
             <li><a href="#">新增</a></li>
-            <li><a href="#">更多</a></li>
+            <li><a href="fav.php">更多</a></li>
         </ul> 
     </div>
 
