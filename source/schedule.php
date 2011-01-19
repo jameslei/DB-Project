@@ -1,16 +1,20 @@
 <?php require_once "template/header.php"; ?>
-
 <?php
 	$id = $_GET["id"];
 	$schedule = Schedule::find($id);
+	// print_r($schedule);
+	// echo $schedule;
 	//$id, $time, $next, $place, $description, $did
-	$next = Schedule::find($next);
-	$date = Day::find($did)->date;
+	$next = Schedule::find($schedule->next);
+	// print_r($next);
+	$date = Day::find($schedule->did)->date;
 ?>
-<h1 align="center"><?php echo $schedule->name ; ?></h1>
+<!-- <h1 align="center"><?php echo $schedule->place ; ?></h1> -->
 <div id="dashboard">
-    <div id="day" class="sixty left">
         <table>
+			<tr>
+				<th colspan = "2"><?php echo $schedule->place ; ?></th>
+			</tr>
         	<tr>
         		<td>日期</td>
         		<td><?php echo $date; ?></td>
@@ -29,7 +33,7 @@
 			</tr>
 			<tr>
 				<td>下一筆</td>
-				<td><a href="schedule.php?id=<?php echo $next->id?>"><?php echo $next->name?></td>
+				<td><a href="schedule.php?id=<?php echo $next->id?>"><?php echo $next->place?></td>
 			</tr>
 
         </table>

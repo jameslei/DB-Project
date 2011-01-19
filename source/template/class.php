@@ -620,8 +620,8 @@ class Schedule{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $shedule = new Schedule($row[1], $row[2], $row[3], $row[4], $row[5]);
-              $shedule->id = $row[0];
+              $schedule = new Schedule($row[1], $row[2], $row[3], $row[4], $row[5]);
+              $schedule->id = $row[0];
               return $schedule;
           }else{
               return NULL;
