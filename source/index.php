@@ -34,7 +34,7 @@
         }
         ?>      
         <ul>
-            <li><a href = "<?php echo "newtrip.php?id=$t_id&belongs_to='traveller'"?>">新增</a></li>
+            <li><a href = "<?php echo "newtrip.php?id=$t_id&belongs_to=traveller"?>">新增</a></li>
         </ul>
     </div>
 
@@ -68,7 +68,7 @@
         }
         ?>
         <ul>
-        <li><a href = "<?php echo "newgroup.php?id=$u_id"?>">開團</a></li>
+        <li><a href = "<?php echo "newgroup.php"?>">開團</a></li>
         </ul>
     </div>
 

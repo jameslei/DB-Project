@@ -202,7 +202,6 @@ class Traveller{
 	      while($row = mysql_fetch_row($result)){
 		      $favor = new Favorite($row[1], $row[2], $row[3], $row[4], $row[5]);
 			  $favor->fid = $row[0];
-			  $favor->lid = $row[5];
 			  $f_array[] = $favor;
 		  }
 		  if(f_array!=NULL){
@@ -468,10 +467,12 @@ class Day{
   }
 }
 class Schedule{
-  public $id, $time, $next;
-  function Schedule($time, $next){
+  public $id, $time, $next, $place, $description;
+  function Schedule($time, $next, $place, $description){
       $this->time = $time;
       $this->next = $next;
+	  $this->place = $place;
+	  $this->description = $description;
   }
 
   public function find($id){
@@ -481,13 +482,30 @@ class Schedule{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $shedule = new Schedule($row[1], $row[3]);
+              $shedule = new Schedule($row[1], $row[2], $row[3], $row[4]);
               $shedule->id = $row[0];
               return $schedule;
           }else{
               return NULL;
           }
       }
+  }
+  public function Save(){      			//save schedule  create new or alter existing
+	if ($this->id == NULL){  		//new schedule
+		// SQL INSERT
+		$query = "INSERT INTO schedule(time, next, place, description) VALUES('$this->time','$this->next','$this->place','$this->description');";
+		$result = mysql_query($query);
+
+	}else{  						//existing schedule
+		// SQL UPDATE
+		$query = "UPDATE trip SET time='$this->time', next='$this->next', place='$this->place', description='$this->description' WHERE id='$this->id';";
+		$result = mysql_query($query);
+	}
+	if(!$result){
+		return false;	
+	}else{
+		return true;
+	}
   }
 }
 class Favorite{
