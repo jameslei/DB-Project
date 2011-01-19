@@ -29,12 +29,12 @@
 		</tr>
 		<tr>
 			<td class = "left">旅程</td>
-			<td><?php foreach($trip_list as $item){
+			<td class = "right"><?php foreach($trip_list as $item){
 				echo "<a href=trip.php?id=$item->id>".$item->name."</a><br/>";
-			}?><br/><a href = "newtrip.php?id=<?php echo $id;?>&belongs_to=group">新增一個旅程</a></td>
+			}?></td>
 		</tr>
-		<tr class="foot">
-                <td colspan="2"></td>
+        <tr class="foot">
+            <td colspan="2"><a href = "newtrip.php?id=<?php echo $id;?>&belongs_to=group">新增一個旅程</a></td>
         </tr>
 	</table>
 	
