@@ -2,6 +2,7 @@
 <?php
       $day = Day::find($_GET['id']);
       $locations = $day->get_location();
+      $schedules = $day->get_schedules();
 ?>
 <div id="dashboard">
     <div class="sixty left">
@@ -9,13 +10,18 @@
             <tr>
                 <th class="head"><?php echo $day->date;?></th>
             </tr>
+            <?php if ($schedules!=NULL){
+                    foreach($schedules as $item){
+            ?>
             <tr>
-                <td></td>
+                <td><a href="schedule.php?id=<?php echo $item->id; ?>"><?php echo $item->description; ?></a></td>
             </tr>
+            <?php }}?>
         </table>
         <ul>
-            <li><a href="#">◀</a></li>
-            <li><a href="#">►</a></li>
+            <li><a href="#" style="text-decoration:none;">◀</a></li>
+            <li><a href="add_schedule.php?id=<?php echo $day->id; ?>" style="text-decoration:none;">✚</a></li>
+            <li><a href="#" style="text-decoration:none;">►</a></li>
         </ul>
     </div>
     
