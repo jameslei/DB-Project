@@ -23,9 +23,10 @@
     <div class="thirty right">
         <h1>地點</h1>
         <table>
-            <?php foreach($locations as $location){?>
+            <?php if ($locations!=NULL){
+             foreach($locations as $location){?>
             <tr><td><a href="location.php?id=<?php echo $location->id; ?>"><?php echo $location->name; ?></a></td></tr>
-            <?php } ?>
+            <?php }} ?>
         </table>
         <ul>
             <li><a href="newlocation.php?id=<?php echo $day->id; ?>">新增地點</a></li>
