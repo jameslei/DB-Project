@@ -70,26 +70,36 @@
     </div>
     <div class="thirty right">
         <h1>♥</h1>
-        <table>
-			<tr>
-				<th>最愛</th>
-				<th>地點</th>
-				<th>心得</th>
-			</tr>
-            <tr>
-                <td>豬扒包</td>
-                <td>澳門</td>
-                <td>好好食!!</td>
-            </tr>
-            <tr>
-                <td>葡撻</td>
-                <td>澳門</td>
-                <td>正!</td>
-            </tr>
-        </table>
+        <?php
+        $favor_array = Trip::getFavor($id);
+        if($favor_array!=NULL){
+            echo "<table>";
+	        echo "<tr>";
+            echo "<th>名字</th>";
+	        echo "<th>時間</th>";
+	        echo "<th>地點</th>";
+	        echo "<th>備註</th>";
+	        echo "</tr>";
+            foreach ($favor_array as $favor_list){
+		        echo "<tr>";
+                echo "<td>$favor_list->name</td>";
+		        echo "<td>$favor_list->time</td>";
+				$lid = $favor_list->location_id;
+				$location=Location::find($lid);
+                echo "<td>$location->name</td>";
+		        echo "<td>$favor_list->note</td>";
+		        echo "</tr>";
+            }
+	        echo "</table>";
+        }else{
+            echo "尚無資料";
+        }
+        ?>
         <ul>
-            <li><a href="#">更多...</a></li>
-        </ul>
+            <li><a href="#">新增</a></li>
+            <li><a href=<?php echo "fav.php?uid=$uid"?>>更多</a></li>
+        </ul> 
     </div>
+
 </div>
 <?php require_once "template/footer.php"; ?>
