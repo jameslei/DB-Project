@@ -10,6 +10,8 @@
           $day = Day::find($_GET['did']);
           $location = Location::find();
       }
+	  //if (isset($_GET['lid'])){//specfic LOCATION
+	      
       
 ?>
 
