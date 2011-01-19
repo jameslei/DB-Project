@@ -559,6 +559,44 @@ class Day{
 		return $location;
 	}
   }
+  private function get_schedules(){     //all the schedule of this day in a array
+	$query = "SELECT * FROM SCHEDULE WHERE did=$this->id ORDER BY `time` ;";
+	$result = mysql_query($query);
+	if(!$result){
+		return false;
+	}else{
+    	$count = 0;
+    	while($row = mysql_fetch_row($result)){
+    		$schedules[] = new Schedule($row[1], $row[2], $row[3], $row[4]), $row[5]);
+    		$schedules[$count++]->id = $row[0];
+    	}
+    	return $schedules;
+	}
+  }
+  
+  public function new_schedule($time, $place, $description, $did){
+	$all_schedules=$this->get_schedules;    // an array containing all schedule objects
+	$num = 0;
+	while(greaterDate($time,$all_schedules[$num])){
+		$num++;
+	}   //$num becomes the first schedule after the one to be added
+	$next = $all_schedules[$num]->id;
+	$schedule = new Schedule($time, $next, $place, $description, $did,);
+	$schedule->Save();
+	$all_schedules[--$num]->next = $schedule->id;
+	$all_schedules[$num]->Save();
+
+  }
+  
+  public function last_schedule(){
+	$all_schedules=$this->get_schedules;    // an array containing all schedule objects
+	$num = sizeof($all_schedules)-1;
+	return $all_schedules[$num];
+  }
+  public function first_schedule(){
+	$all_schedules=$this->get_schedules;    // an array containing all schedule objects
+	return $all_schedules[0];
+  }
 }
 class Schedule{
   public $id, $time, $next, $place, $description, $did;
@@ -577,7 +615,7 @@ class Schedule{
           return false;
       }else{
           if ($row = mysql_fetch_row($result)){
-              $shedule = new Schedule($row[1], $row[2], $row[3], $row[4]);
+              $shedule = new Schedule($row[1], $row[2], $row[3], $row[4], $row[5]);
               $shedule->id = $row[0];
               return $schedule;
           }else{
@@ -588,17 +626,18 @@ class Schedule{
   public function Save(){      			//save schedule  create new or alter existing
 	if ($this->id == NULL){  		//new schedule
 		// SQL INSERT
-		$query = "INSERT INTO schedule(time, next, place, description) VALUES('$this->time','$this->next','$this->place','$this->description');";
+		$query = "INSERT INTO schedule(time, next, place, description, did) VALUES('$this->time','$this->next','$this->place','$this->description','$this->did');";
 		$result = mysql_query($query);
 
 	}else{  						//existing schedule
 		// SQL UPDATE
-		$query = "UPDATE trip SET time='$this->time', next='$this->next', place='$this->place', description='$this->description' WHERE id='$this->id';";
+		$query = "UPDATE trip SET time='$this->time', next='$this->next', place='$this->place', description='$this->description', did='$this->did' WHERE id='$this->id';";
 		$result = mysql_query($query);
 	}
 	if(!$result){
 		return false;	
 	}else{
+		$this->id = mysql_insert_id();
 		return true;
 	}
   }
