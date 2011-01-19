@@ -18,31 +18,36 @@
             <?php while($day!=NULL){?>
             <tr>
                 <td><a href="day.php?id=<?php echo $day->id;?>"><?php echo $day->date; ?></a></td>
-                <td></td>
+                <td>
+                <?php $locations=$day->get_location();
+                      echo $locations[0]->name;
+                      if (count($locations)>1)
+                          echo ", ".$locations[1]->name."...";
+                ?>
+                </td>
                 <td></td>
             </tr>
             <?php $day = $day->next;} ?>
-        	<?php
-        		for($i=0; $i<$count; $i++){
-        			$day = $all_days[$i];
-        			// print_r($day);
-        			$location = $day->get_location();
-        			$did = $day->id;
-        			echo "<tr><td>$day->date</td>";
-        			if (sizeof($location)==1){
-        				// print_r($location[0]);
-        				echo"<td>".$location[0]."</td>";
-        			}else{
-        				echo"<td>";
-        				foreach($location as $item){
-        					echo"$item/";
-        				}
-				
-        			}
-        			echo"</td><td><a href=\"day.php?id=$did\">view more</a></td></tr>";
-        		}
-		
-        	?>
+            <?php
+// for($i=0; $i<$count; $i++){
+//                          $day = $all_days[$i];
+//                          // print_r($day);
+//                          $location = $day->get_location();
+//                          $did = $day->id;
+//                          echo "<tr><td>$day->date</td>";
+//                          if (sizeof($location)==1){
+//                              // print_r($location[0]);
+//                              echo"<td>".$location[0]."</td>";
+//                          }else{
+//                              echo"<td>";
+//                              foreach($location as $item){
+//                                  echo"$item/";
+//                              }
+// 
+//                          }
+//                          echo"</td><td><a href=\"day.php?id=$did\">view more</a></td></tr>";
+            
+            ?>
         </table>
         <ul>
             <li><a href="create_day.php?id=<?php echo $trip->id?>">新增下一天</a></li>

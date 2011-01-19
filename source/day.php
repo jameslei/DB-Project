@@ -31,7 +31,7 @@
         <table>
             <?php if ($locations!=NULL){
              foreach($locations as $location){?>
-            <tr><td><a href="location.php?id=<?php echo $location->id; ?>"><?php echo $location->name; ?></a></td></tr>
+            <tr><td><?php echo $location->name; ?></td></tr>
             <?php }} ?>
         </table>
         <ul>
