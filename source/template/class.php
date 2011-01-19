@@ -633,6 +633,21 @@ class Day{
 	$all_schedules=$this->get_schedules();    // an array containing all schedule objects
 	return $all_schedules[0];
   }
+  public function get_shelter(){
+	  $query = "SELECT * from SHELTER WHERE did='$this->id'";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $shelter = new Shelter($row[1], $row[2], $row[3]);
+              $shelter->id = $row[0];
+              return $shelter;
+          }else{
+              return NULL;
+          }
+      }
+  }
 }
 class Schedule{
   public $id, $time, $next, $place, $description, $did;
@@ -807,6 +822,25 @@ class Shelter{
               return NULL;
           }
       }
+  }
+  public function Save(){      			//save schedule  create new or alter existing
+	if ($this->id == NULL){  		//new schedule
+		// SQL INSERT
+		$query = "INSERT INTO shelter(name, info, did) VALUES('$this->name','$this->info','$this->day');";
+		// echo $query;
+		$result = mysql_query($query);
+
+	}else{  						//existing schedule
+		// SQL UPDATE
+		$query = "UPDATE shelter SET name='$this->name', info='$this->info', did='$this->day'WHERE shid='$this->id';";
+		$result = mysql_query($query);
+	}
+	if(!$result){
+		return false;	
+	}else{
+		$this->id = mysql_insert_id();
+		return true;
+	}
   }
 }
 ?>

@@ -35,12 +35,10 @@
         <h1>住宿</h1>
         <table>
             <tr>
-                <td></td>
+                <td><?php echo "<a href=\"shelter.php?id=".$day->get_shelter()->id."\">".$day->get_shelter()->name."</a>" ?></td>
             </tr>
         </table>
-        <ul>
-            <li><a href="#">詳細資訊</a></li>
-        </ul>
+        <?php if(!$day->get_shelter()) echo "<ul><li><a href=\"newshelter.php?id=$day->id\">新增</a></li></ul>" ?>
     </div>
     <div class="thirty right">
         <h1>♥</h1>
