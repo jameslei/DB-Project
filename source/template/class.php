@@ -381,7 +381,12 @@ class Trip{
 	if(!$result){
 		return false;
 	}else{
-		return $result;
+    	$count = 0;
+    	while($row = mysql_fetch_row($result)){
+    		$days[] = new Day($row[1], $row[2], $row[3]);
+    		$days[$count++]->id = $row[0];
+    	}
+    	return $days;
 	}
   }
 

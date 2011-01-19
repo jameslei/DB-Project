@@ -3,13 +3,8 @@
 	$id = $_GET["id"];
 	$trip = Trip::find($id);
 	// find all the days of the trip
-	$days = $trip->get_days(); // $days contains all the days of the trip
-	$count = 0;
-	// $all_days = [];
-	while($row = mysql_fetch_row($days)){
-		$all_days[] = new Day($row[1], $row[2], $row[3]);
-		$all_days[$count++]->id = $row[0];
-	}
+	$all_days = $trip->get_days(); // $days contains all the days of the trip
+
 	
 	
 ?>
