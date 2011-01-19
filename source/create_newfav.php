@@ -6,11 +6,14 @@
 		$description = $_POST['description'];
 		$user = Account::find($_SESSION['aid']);
 		$traveller = $user->traveller;
-		$uid = $traveller->id;
-		
-		$favor = new Favorite($name, $new_date, $type, $description, $location);
-		if($group->Save()){
-			$invite = $group->new_member($creator_id);
+		$uid = $traveller->id;		
+		$query = "SELECT * from LOCATION WHERE name = '$location'";
+		$result = mysql_query($query);
+		$row = mysql_fetch_row($result);
+		$favor = new Favorite($name, $new_date, $type, $description, 1);
+		if($favor->save()){
+		     //echo "cool";
+			//header('Location: index.php');
 			header('Location: index.php');
 		}
 		
@@ -20,3 +23,4 @@
 ?>
 
 <?php mysql_close($db_server);?>
+
