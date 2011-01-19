@@ -497,6 +497,7 @@ class Location{
   		// SQL UPDATE
   		$query = "UPDATE `Travel Journal`.`LOCATION` SET `name` = '$this->name', `cid` = '$this->city_id' WHERE `LOCATION`.`lid` = $this->id;";
   	}
+	// echo $query;
   	$result = mysql_query($query);
   	if(!$result){
   		return false;	
@@ -755,6 +756,21 @@ class City{
   }
   public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          if ($row = mysql_fetch_row($result)){
+              $city = new City($row[1], $row[0]);
+              $city->id = $row[2];
+              return $city;
+          }else{
+              return NULL;
+          }
+      }
+  }
+  public function find_by_name($name){
+	  $query = "SELECT * from CITY WHERE name='$name'";
       $result = mysql_query($query);
       if (!$result){
           return false;
