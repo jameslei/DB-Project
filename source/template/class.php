@@ -161,7 +161,7 @@ class Traveller{
       }
   }
   public function find($id){
-      $query = "SELECT * from TRAVELLER WHERE uid='$id'";
+      $query = "SELECT * from `TRAVELLER` WHERE `uid`=$id;";
       $result = mysql_query($query);
       if (!$result){
           return false;
@@ -276,6 +276,7 @@ class Group{
 	if(!$result){
 		return false;	
 	}else{
+		$this->id = mysql_insert_id();
 		return true;
 	}
 }
@@ -306,6 +307,7 @@ class Group{
   }
   public function members(){
       $query = "SELECT `TRAVELLER`.`uid` FROM `GROUP_TRAVELLER`, `TRAVELLER` where `GROUP_TRAVELLER`.`gid` = $this->id AND `GROUP_TRAVELLER`.`uid`=`TRAVELLER`.`uid`;";
+	  //echo $query;
       $result = mysql_query($query);
       if (!$result){
           return false;

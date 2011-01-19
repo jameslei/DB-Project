@@ -29,9 +29,9 @@
 		</tr>
 		<tr>
 			<td class = "left">旅程</td>
-			<td class = "right"><?php foreach($trip_list as $item){
+			<td class = "right"><?php if (!empty($trip_list)){foreach($trip_list as $item){
 				echo "<a href=trip.php?id=$item->id>".$item->name."</a><br/>";
-			}?></td>
+			}}?></td>
 		</tr>
         <tr class="foot">
             <td colspan="2"><a href = "newtrip.php?id=<?php echo $id;?>&belongs_to=group">新增一個旅程</a></td>

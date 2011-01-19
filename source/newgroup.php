@@ -1,7 +1,10 @@
 <?php require_once "template/header.php"; ?>
 
 <?php
-	$id = $_GET["id"];
+	// $id = $_GET["id"];
+	$user = Account::find($_SESSION['aid']);
+	$traveller = $user->traveller;
+	$id = $traveller->id;
 ?>
 <!-- <table> 
     <tr > 
@@ -38,7 +41,7 @@
     </tr> 
 </table> -->
 <div id="newgroup" align="center">
-	<form id="form1" method="post" action="<?php echo "create_newgroup.php?id=$id"?>">
+	<form id="form1" method="post" action="<?php echo "create_newgroup.php?"?>">
 	  <table>
 		<tr > 
 	        <th colspan="2" class="head">新增群組</th> 
