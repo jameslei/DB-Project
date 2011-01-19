@@ -561,12 +561,13 @@ class Day{
   }
 }
 class Schedule{
-  public $id, $time, $next, $place, $description;
-  function Schedule($time, $next, $place, $description){
+  public $id, $time, $next, $place, $description, $did;
+  function Schedule($time, $next, $place, $description, $did){
       $this->time = $time;
       $this->next = $next;
 	  $this->place = $place;
 	  $this->description = $description;
+	  $this->did = $did;
   }
 
   public function find($id){
