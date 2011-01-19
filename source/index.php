@@ -53,11 +53,13 @@
 	            $gid = $group_list->id;
 	            $count = GROUP::getCount($gid);
 		        echo "<tr>";
-		        echo "<td>$group_list->name</td>";
-		        echo "<td>";
-		        echo "<a href = group.php?id=$gid > ";
-		        echo "$group_list->description";
-	            echo "</a>";
+				echo "<td>";
+				echo "<a href = group.php?id=$gid > ";
+		        echo "$group_list->name";
+				echo "</a>";
+				echo "</td>";
+		        echo "<td>";	        
+		        echo "$group_list->description";	            
 		        echo "</td>";
 		        echo "<td>$count</td>";
 		        echo "</tr>";
@@ -123,7 +125,7 @@
         ?>
         <ul>
             <li><a href="#">新增</a></li>
-            <li><a href="fav.php">更多</a></li>
+            <li><a href="fav.php?id=$tid">更多</a></li>
         </ul> 
     </div>
 
