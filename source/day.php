@@ -55,6 +55,7 @@
             </tr>
         </table>
         <ul>
+			<li><a href="newfav.php?id=<?php echo $day->id?>">新增</a></li>
             <li><a href="#">更多</a></li>
         </ul>
     </div>
