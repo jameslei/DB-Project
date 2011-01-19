@@ -11,7 +11,7 @@
         $traveller = $user->traveller;
         $uid = ($traveller->id);
         $trip_array = Traveller::getTrip($uid);
-
+        $t_id=$user->traveller->id; 
         if($trip_array!=NULL){
             echo "<table>";
 	        echo "<tr>";
@@ -32,8 +32,7 @@
         }else{
             echo "尚無資料";
         }
-        ?>
-        <?php $t_id=$user->traveller->id; ?>
+        ?>      
         <ul>
             <li><a href = "<?php echo "newtrip.php?id=$t_id&belongs_to='traveller'"?>">新增</a></li>
         </ul>
