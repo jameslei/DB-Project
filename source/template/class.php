@@ -408,7 +408,7 @@ class Trip{
       }else{
           return false;
       }
-      
+      return true;
   }
   
   public function last_day(){
