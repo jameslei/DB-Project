@@ -124,7 +124,7 @@
         }
         ?>
         <ul>
-            <li><a href="#">新增</a></li>
+            <!-- <li><a href="newfave.php">新增</a></li> -->
             <li><a href=<?php echo "fav.php?uid=$uid"?>>更多</a></li>
         </ul> 
     </div>
