@@ -11,7 +11,7 @@
         <input type="text" name="place"/>
 	  </p>
 	  <p>
-	    <label for="note">Note : </label>
+	    <label for="note">Description : </label>
         <textarea name="note" cols="18" rows="5"></textarea>
 	  </p>
 	  <input type="submit" name="submit" id="submit" value="submit" />                                                  
