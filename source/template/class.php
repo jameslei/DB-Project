@@ -490,7 +490,6 @@ class Location{
       }
   }
   public function save(){
-      print_r($this)."<br/>";
       if ($this->id == NULL){  		//new schedule
   		// SQL INSERT
   		$query = "INSERT INTO `Travel Journal`.`LOCATION` (`lid`, `name`, `next_traffic`, `tid`, `next`, `cid`) VALUES (NULL, '$this->name', NULL, $this->trip_id, NULL, $this->city_id);";
