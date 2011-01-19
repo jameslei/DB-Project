@@ -672,6 +672,22 @@ class Favorite{
           }
       }
   }
+
+  public function save(){
+      if ($this->id==NULL){
+          $query = "INSERT INTO `FAV_THING`(name, time, type, note, lid) VALUES ('$this->name', '$this->time', '$this->type', '$this->note', '$this->location_id');";
+          $result = mysql_query($query);
+      }else{
+	      $query = "UPDATE `FAV_THING` SET name='$this->name', time='$this->time', type='$this->type', note='$this->note', lid='$this->lid' WHERE id='$this->id';";
+		  $result = mysql_query($query);
+	  }
+	  if(!$result){
+	      return false;
+	  }else{
+	      $this->id = mysql_insert_id();
+		  return true;
+	  }
+  }
 }
 class City{
   public $id, $name, $country;
