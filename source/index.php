@@ -80,10 +80,6 @@
         $city_array = Traveller::getCity($uid);		
         if($city_array!=NULL){
             echo "<table>";
-	        echo "<tr>";
-            echo "<th>你曾到達的城市</th>";
-	        echo "<th>日期</th>";
-	        echo "</tr>";
             foreach ($city_array as $city_list){
 		        echo "<tr>";
 		        echo "<td>$city_list->name</td>";
@@ -91,7 +87,7 @@
             }
 	        echo "</table>";
         }else{
-            echo "尚無資料";
+            echo "<table><tr><td>尚無資料</td></tr></table>";
         }
         ?>
     </div>
@@ -120,11 +116,10 @@
             }
 	        echo "</table>";
         }else{
-            echo "尚無資料";
+            echo "<table><tr><td>尚無資料</td></tr></table>";
         }
         ?>
         <ul>
-            <li><a href="#">新增</a></li>
             <li><a href=<?php echo "fav.php?uid=$uid"?>>更多</a></li>
         </ul> 
     </div>
