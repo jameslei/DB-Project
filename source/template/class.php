@@ -482,13 +482,38 @@ class Location{
       }else{
           if ($row = mysql_fetch_row($result)){
               $location = new Location($row[1], $row[3], $row[5], $row[4], $row[2]);
-              $loaction->id = $row[0];
+              $location->id = $row[0];
               return $location;
           }else{
               return false;
           }
       }
   }
+  public function save(){
+      print_r($this)."<br/>";
+      if ($this->id == NULL){  		//new schedule
+  		// SQL INSERT
+  		$query = "INSERT INTO `Travel Journal`.`LOCATION` (`lid`, `name`, `next_traffic`, `tid`, `next`, `cid`) VALUES (NULL, '$this->name', NULL, $this->trip_id, NULL, $this->city_id);";
+  	}else{  						//existing schedule
+  		// SQL UPDATE
+  		$query = "UPDATE `Travel Journal`.`LOCATION` SET `name` = '$this->name', `cid` = '$this->city_id' WHERE `LOCATION`.`lid` = $this->id;";
+  	}
+  	$result = mysql_query($query);
+  	if(!$result){
+  		return false;	
+  	}else{
+  		if ($this->id==NULL)
+  		    $this->id = mysql_insert_id();
+  		return true;
+  	}
+  }
+  
+  public function add_day($day){
+      $query = "INSERT INTO `Travel Journal`.`LOCATION_DAY` (`lid`, `did`) VALUES ('$this->id', '$day->id');";
+      $result = mysql_query($query);
+      return (!$result) ? false : true;
+  }
+  
   public function getFavor($lid){
       $query = "SELECT FAV_THING.fid, FAV_THING.name, FAV_THING.time, FAV_THING.type, FAV_THING.note, FAV_THING.lid from FAV_THING, LOCATION WHERE LOCATION.lid='$lid' AND LOCATION.lid=FAV_THING.lid";
 	  $result = mysql_query($query);
@@ -547,21 +572,28 @@ class Day{
       }
   }
   function get_location(){  //find the location(s) of the day
-	$query = "SELECT name FROM DAY NATURAL JOIN LOCATION NATURAL JOIN LOCATION_DAY WHERE did='$this->id'";
+	$query = "SELECT lid FROM LOCATION NATURAL JOIN LOCATION_DAY WHERE did='$this->id'";
 	$result = mysql_query($query);
 	if (!$result){
 		return false;
 	}else{
 		while ($row = mysql_fetch_row($result)){
-			$location[] = $row[0];
-			$count++;
-		}	
+			$location[] = Location::find($row[0]);
+		}
 		return $location;
 	}
   }
   
   public function add_location($name, $day, $cid){
-      $location = new Location($name, $day->id, $cid, NULL, NULL);
+      $location = new Location($name, $day->tid, $cid, NULL, NULL);
+      if($location->save()){
+          if($location->add_day($day)){
+              return true;
+          }
+          echo "add_day error";
+      }
+      echo "save error";
+      return false;
   }
   
   private function get_schedules(){     //all the schedule of this day in a array
