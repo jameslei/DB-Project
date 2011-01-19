@@ -56,7 +56,15 @@ nav li a, nav li a:link, nav li a:visited, nav li a:active  {color: #293232;}
 nav li a:hover                                              {color: #E7FF60;}
 article{
   background-color: #D5D7A5;
-  height: 480px;
+  min-height: 480px;
+  overflow: auto;
+}
+article:after {
+  clear : both;
+  content : '.';
+  display : block;
+  height : 0;
+  overflow : hidden;
 }
 article .head      {background: #354242; border-radius: 7px 7px 0 0; color:#E7FF60;}
 article .left      {border-left: 1px solid #fff;}
