@@ -572,7 +572,7 @@ class Day{
 	}else{
     	$count = 0;
     	while($row = mysql_fetch_row($result)){
-    		$schedules[] = new Schedule($row[1], $row[2], $row[3], $row[4]), $row[5]);
+    		$schedules[] = new Schedule($row[1], $row[2], $row[3], $row[4], $row[5]);
     		$schedules[$count++]->id = $row[0];
     	}
     	return $schedules;
