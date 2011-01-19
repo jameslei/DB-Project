@@ -3,12 +3,12 @@
       $account = Account::find($_SESSION['aid']);
       $traveller = $account->traveller;
       if (isset($_GET['id'])){//all DAYs
-	  echo "fuck";
+	  echo"fuck";
           $trip = Trip::find($_GET['id']);
           $days = $trip->get_days();
       }
       if (isset($_GET['did'])){//specfic DAY
-	  echo "fuck";
+
           $day = Day::find($_GET['did']);
           $location = Location::find();
       }

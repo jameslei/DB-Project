@@ -125,7 +125,7 @@
         ?>
         <ul>
             <li><a href="#">新增</a></li>
-            <li><a href="fav.php?id=$tid">更多</a></li>
+            <li><a href="fav.php?did=$id">更多</a></li>
         </ul> 
     </div>
 

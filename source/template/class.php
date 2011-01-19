@@ -296,7 +296,7 @@ class Group{
       }
   }
   public function getCount($gid){
-      $query = "SELECT * FROM `GROUP` WHERE `GROUP`.gid=$gid";
+      $query = "SELECT * FROM `GROUP_TRAVELLER` WHERE `GROUP_TRAVELLER`.gid=$gid";
 	  $result = mysql_query($query);
 	  $rows = mysql_num_rows($result);
 	  if(!result){
@@ -448,7 +448,7 @@ class Location{
               $loaction->id = $row[0];
               return $location;
           }else{
-              return -1;
+              return false;
           }
       }
   }
