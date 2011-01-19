@@ -30,7 +30,7 @@
             }
 	        echo "</table>";
         }else{
-            echo "尚無資料";
+            echo "<table><tr><td>尚無資料</td></tr></table>";
         }
         ?>      
         <ul>
@@ -66,7 +66,7 @@
             }
 	        echo "</table>";
         }else{
-            echo "尚無資料";
+            echo "<table><tr><td>尚無資料</td></tr></table>";
         }
         ?>
         <ul>
