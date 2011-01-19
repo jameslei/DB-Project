@@ -194,14 +194,15 @@ class Traveller{
       }
   }
   public function getFavor($uid){
-      $query = "SELECT * from FAV_THING, TRAVELLER, TRIP, LOCATION WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
+      $query = "SELECT FAV_THING.fid, FAV_THING.name, FAV_THING.time, FAV_THING.type, FAV_THING.note, FAV_THING.lid from FAV_THING, TRAVELLER, TRIP, LOCATION WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
 	  $result = mysql_query($query);
 	  if(!result){
 	      return false;
 	  }else{
 	      while($row = mysql_fetch_row($result)){
 		      $favor = new Favorite($row[1], $row[2], $row[3], $row[4], $row[5]);
-			  $favor->id = $row[0];
+			  $favor->fid = $row[0];
+			  $favor->lid = $row[5];
 			  $f_array[] = $favor;
 		  }
 		  if(f_array!=NULL){
@@ -423,7 +424,7 @@ class Location{
               $loaction->id = $row[0];
               return $location;
           }else{
-              return NULL;
+              return -1;
           }
       }
   }

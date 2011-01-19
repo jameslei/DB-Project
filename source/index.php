@@ -55,7 +55,7 @@
 		        echo "<tr>";
 		        echo "<td>$group_list->name</td>";
 		        echo "<td>";
-		        echo "<a href = group.php?id=$uid > ";
+		        echo "<a href = group.php?id=$gid > ";
 		        echo "$group_list->description";
 	            echo "</a>";
 		        echo "</td>";
@@ -68,14 +68,14 @@
         }
         ?>
         <ul>
-        <a href = "<?php echo "newgroup.php?id=$u_id"?>">開團</a>
+        <li><a href = "<?php echo "newgroup.php?id=$u_id"?>">開團</a></li>
         </ul>
     </div>
 
     <div id="city" class="forty-five left">
         <h1>城市</h1>
         <?php
-        $city_array = Traveller::getCity($uid);
+        $city_array = Traveller::getCity($uid);		
         if($city_array!=NULL){
             echo "<table>";
 	        echo "<tr>";
@@ -110,7 +110,9 @@
 		        echo "<tr>";
                 echo "<td>$favor_list->name</td>";
 		        echo "<td>$favor_list->time</td>";
-                echo "<td>$favor_list->lid</td>";
+				$lid = $favor_list->location_id;
+				$location=Location::find($lid);
+                echo "<td>$location->name</td>";
 		        echo "<td>$favor_list->note</td>";
 		        echo "</tr>";
             }
