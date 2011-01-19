@@ -540,6 +540,15 @@ class Day{
       $this->next = ($next==NULL) ? NULL : Day::find($next);
 	  $this->tid = $tid;
   }
+  public function last(){
+      $result = mysql_query("SELECT `did` FROM `DAY` WHERE `next`=$this->id;");
+      if (!$result)
+        return false;
+      if (! $row = mysql_fetch_row($result)){
+          return NULL;
+      }
+      return Day::find($row[0]);
+  }
   public function save(){
       $date = $this->date;
       if ($this->id==NULL){

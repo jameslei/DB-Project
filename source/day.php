@@ -19,9 +19,17 @@
             <?php }}?>
         </table>
         <ul>
-            <li><a href="#" style="text-decoration:none;">◀</a></li>
+            <?php if ($day->last()!=NULL){ $last=$day->last();?>
+            <li><a href="day.php?id=<?php echo $last->id; ?>" style="text-decoration:none;">◀</a></li>
+            <?php }else{ ?>
+            <li style="color: #999;">◀</li>
+            <?php }?>
             <li><a href="add_schedule.php?id=<?php echo $day->id; ?>" style="text-decoration:none;">✚</a></li>
-            <li><a href="#" style="text-decoration:none;">►</a></li>
+            <?php if ($day->next!=NULL){ $next=$day->next; ?>
+            <li><a href="day.php?id=<?php echo $next->id; ?>" style="text-decoration:none;">►</a></li>
+            <?php }else{ ?>
+            <li style="color: #999;">►</li>
+            <?php }?>
         </ul>
     </div>
     
