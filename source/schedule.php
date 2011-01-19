@@ -5,15 +5,15 @@
 	// print_r($schedule);
 	// echo $schedule;
 	//$id, $time, $next, $place, $description, $did
-	$next = Schedule::find($schedule->next);
-	// print_r($next);
+	$next = $schedule->next();
 	$date = Day::find($schedule->did)->date;
+	$location = Location::find($schedule->lid);
 ?>
 <!-- <h1 align="center"><?php echo $schedule->place ; ?></h1> -->
-<div id="dashboard">
+<div>
         <table>
 			<tr>
-				<th colspan = "2"><?php echo $schedule->place ; ?></th>
+				<th colspan ="2" class="head"><?php echo $location->name ; ?></th>
 			</tr>
         	<tr>
         		<td>日期</td>
@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td>地點</td>
-				<td><?php echo $schedule->place;?></td>
+				<td><?php echo $location->name;?></td>
 			</tr>
 			<tr>
 				<td>內容</td>
@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td>下一筆</td>
-				<td><a href="schedule.php?id=<?php echo $next->id?>"><?php echo $next->place?></td>
+				<td><a href="schedule.php?id=<?php echo $next->id?>"><?php echo $next->description?></td>
 			</tr>
 
         </table>
