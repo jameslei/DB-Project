@@ -193,7 +193,7 @@ class Traveller{
 	      }  
       }
   }
-  public function getFavor($uid){
+  public function getFavor($uid){          //an array containing all fav objects
       $query = "SELECT FAV_THING.fid, FAV_THING.name, FAV_THING.time, FAV_THING.type, FAV_THING.note, FAV_THING.lid from FAV_THING, TRAVELLER, TRIP, LOCATION WHERE TRAVELLER.uid='$uid' AND TRAVELLER.uid=TRIP.owner_id AND TRIP.tid=LOCATION.tid AND LOCATION.lid=FAV_THING.lid";
 	  $result = mysql_query($query);
 	  if(!result){
