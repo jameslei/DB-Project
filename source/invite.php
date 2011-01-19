@@ -4,7 +4,7 @@
 	// $group = Group::find($id);  //rerutn group object(id, name, description, uid)
 ?>
 <div class = "center">
-	<form id="form1" method="post" action="<?php echo "create_invite.php?id=$id"?>">
+	<form id="form1" method="post" action="<?php echo "create_invite.php?id=".$id ?>">
 	<table>
 		<tr>
 			<h1 align = "center"><?php echo $group->name; ?><h1>
