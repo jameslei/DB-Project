@@ -1,19 +1,19 @@
-<?php require_once "template/header.php"; 
+Ôªø<?php require_once "template/header.php"; 
 
       $account = Account::find($_SESSION['aid']);
       $traveller = $account->traveller;
 	  $uid = ($traveller->id);
       if (isset($_GET['uid'])){//all DAYs
         //echo "<div id="favorite" class="forty-five right">";
-        echo "<h1>?</h1>";       
+        echo "<h1>‚ô•</h1>";       
         $favor_array = Traveller::getFavor($uid);
         if($favor_array!=NULL){
             echo "<table>";
 	        echo "<tr>";
-            echo "<th>¶W¶r</th>";
-	        echo "<th>Æ…∂°</th>";
-	        echo "<th>¶a¬I</th>";
-	        echo "<th>≥∆µ˘</th>";
+            echo "<th>ÂêçÂ≠ó</th>";
+	        echo "<th>ÊôÇÈñì</th>";
+	        echo "<th>Âú∞Èªû</th>";
+	        echo "<th>ÂÇôË®ª</th>";
 	        echo "</tr>";
             foreach ($favor_array as $favor_list){
 		        echo "<tr>";
@@ -27,7 +27,7 @@
             }
 	        echo "</table>";
         }else{
-            echo "©|µL∏ÍÆ∆";
+            echo "Â∞öÁÑ°Ë≥áÊñô";
         }
        //echo "</div>"; 
        //$trip = Trip::find($_GET['id']);
@@ -41,10 +41,10 @@
         if($favor_array!=NULL){
             echo "<table>";
 	        echo "<tr>";
-            echo "<th>¶W¶r</th>";
-	        echo "<th>Æ…∂°</th>";
-	        echo "<th>¶a¬I</th>";
-	        echo "<th>≥∆µ˘</th>";
+            echo "<th>ÂêçÂ≠ó</th>";
+	        echo "<th>ÊôÇÈñì</th>";
+	        echo "<th>Âú∞Èªû</th>";
+	        echo "<th>ÂÇôË®ª</th>";
 	        echo "</tr>";
             foreach ($favor_array as $favor_list){
 		        echo "<tr>";
@@ -58,7 +58,7 @@
             }
 	        echo "</table>";
         }else{
-            echo "©|µL∏ÍÆ∆";
+            echo "Â∞öÁÑ°Ë≥áÊñô";
         }
       }
 	  if (isset($_GET['lid'])){//specfic LOCATION
@@ -67,10 +67,10 @@
         if($favor_array!=NULL){
             echo "<table>";
 	        echo "<tr>";
-            echo "<th>¶W¶r</th>";
-	        echo "<th>Æ…∂°</th>";
-	        echo "<th>¶a¬I</th>";
-	        echo "<th>≥∆µ˘</th>";
+            echo "<th>ÂêçÂ≠ó</th>";
+	        echo "<th>ÊôÇÈñì</th>";
+	        echo "<th>Âú∞Èªû</th>";
+	        echo "<th>ÂÇôË®ª</th>";
 	        echo "</tr>";
             foreach ($favor_array as $favor_list){
 		        echo "<tr>";
@@ -84,13 +84,13 @@
             }
 	        echo "</table>";
         }else{
-            echo "©|µL∏ÍÆ∆";
+            echo "Â∞öÁÑ°Ë≥áÊñô";
         }
 
 	  }
 	  ?>
 	  <ul>
-          <li><a href = "<?php echo "newfav.php"?>">∑sºW</a></li>
+          <li><a href = "<?php echo "newfav.php"?>">Êñ∞Â¢û</a></li>
       </ul>
 <?	  
       
