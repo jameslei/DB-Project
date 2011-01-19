@@ -375,10 +375,8 @@ class Trip{
 		return true;
 	}
   }
-
-  public function get_days(){
-	$trip = Trip::find($this->id);
-	$query = "SELECT * FROM DAY WHERE tid=$this->id ;";
+  private function get_days(){
+	$query = "SELECT * FROM DAY WHERE tid=$this->id ORDER BY `date` ;";
 	$result = mysql_query($query);
 	if(!$result){
 		return false;
@@ -391,7 +389,46 @@ class Trip{
     	return $days;
 	}
   }
-
+  
+  public function new_day(){
+      $date = $this->last_day();
+      $date->add(new DateInterval('P1D'));
+      $new_day = new Day($date, NULL, $this->id);
+      if ($new_day->save()){
+          $days = $this->get_days();
+          if (count($days)>1){
+              $last_day = $days[count($days)-2];
+              $last_day->next = $new_day;
+              if ($last_day->save()){
+                  return true;
+              }else{
+                  return false;
+              }
+          }
+      }else{
+          return false;
+      }
+      return true;
+  }
+  
+  public function last_day(){
+      $days = $this->get_days();
+      $date = new DateTime();
+      if ($days==NULL){//還沒有day
+          $time = explode('-', $this->time);
+          $date->setDate($time[0], $time[1], $time[2]-1);
+      }else{
+          $last_day = $days[count($days)-1];
+          $time = explode('-', $last_day->date);
+          $date->setDate($time[0], $time[1], $time[2]);
+      }
+      return $date;
+  }
+  public function first_day(){
+      $days = $this->get_days();
+      return ($days==NULL) ? NULL : $days[0];
+  }
+  
   public function find($id){
 	$query = "SELECT * FROM TRIP WHERE tid=$id;";
 	$result = mysql_query($query);
@@ -474,12 +511,26 @@ class Location{
 class Day{
   public $id, $date, $next, $tid;
   function Day($date, $next, $tid){
-
       $this->date = $date;
-      $this->next = $next;
+      $this->next = ($next==NULL) ? NULL : Day::find($next);
 	  $this->tid = $tid;
   }
-
+  public function save(){
+      $date = $this->date;
+      if ($this->id==NULL){
+          $query = "INSERT INTO `Travel Journal`.`DAY` (`did`, `date`, `next`, `tid`) VALUES (NULL, '".$date->format("Y-m-d")."', NULL, $this->tid);";
+      }else{
+          $next = $this->next;
+          $query = "UPDATE  `Travel Journal`.`DAY` SET  `next` =  '$next->id' WHERE  `DAY`.`did` =$this->id;";
+      }
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          $this->id = mysql_insert_id();
+          return true;
+      }
+  }
   public function find($id){
       $query = "SELECT * from DAY WHERE did='$id'";
       $result = mysql_query($query);
@@ -510,12 +561,13 @@ class Day{
   }
 }
 class Schedule{
-  public $id, $time, $next, $place, $description;
-  function Schedule($time, $next, $place, $description){
+  public $id, $time, $next, $place, $description, $did;
+  function Schedule($time, $next, $place, $description, $did){
       $this->time = $time;
       $this->next = $next;
 	  $this->place = $place;
 	  $this->description = $description;
+	  $this->did = $did;
   }
 
   public function find($id){
@@ -583,6 +635,18 @@ class City{
       $this->name = $name;
       $this->country = Country::find($country);
   }
+  public function all(){
+      $query = "SELECT `cid` from `CITY`;";
+      $result = mysql_query($query);
+      if (!$result){
+          return false;
+      }else{
+          while($row = mysql_fetch_row($result)){
+              $cities[] = City::find($row[0]);
+          }
+          return $cities;
+      }
+  }
   public function find($id){
       $query = "SELECT * from CITY WHERE cid='$id'";
       $result = mysql_query($query);
@@ -631,11 +695,11 @@ class Country{
   }
 }
 class Shelter{
-  public $id, $name, $info, $location_id;
-  function Shelter($name, $info, $location_id){
+  public $id, $name, $info, $day;
+  function Shelter($name, $info, $day){
       $this->name = $name;
       $this->info = $info;
-      $this->location_id = $location_id;
+      $this->day = $day;
   }
 
   public function find($id){

@@ -3,10 +3,7 @@
 	$id = $_GET["id"];
 	$trip = Trip::find($id);
 	// find all the days of the trip
-	$all_days = $trip->get_days(); // $days contains all the days of the trip
-
-	
-	
+	$day = $trip->first_day(); // $days contains all the days of the trip
 ?>
 <h1 align="center"><?php echo $trip->name ; ?></h1>
 <div id="dashboard">
@@ -18,6 +15,13 @@
         		<th></th>
         	</tr>
             <!-- display the days of the trip -->
+            <?php while($day!=NULL){?>
+            <tr>
+                <td><a href="day.php?id=<?php echo $day->id;?>"><?php echo $day->date; ?></a></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <?php $day = $day->next;} ?>
         	<?php
         		for($i=0; $i<$count; $i++){
         			$day = $all_days[$i];
@@ -41,7 +45,7 @@
         	?>
         </table>
         <ul>
-            <li><a href="add_day.php?id=<?php echo $trip->id?>">新增下一天</a></li>
+            <li><a href="create_day.php?id=<?php echo $trip->id?>">新增下一天</a></li>
         <ul>
     </div>
     <div class="thirty right">
