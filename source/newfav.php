@@ -19,13 +19,14 @@
 			<tr>
 				<td class="left">類型</td>
 				<td class="right">
-					<input type="radio" name="radio" id="see" value="see" /><label for="see">愛看</label>
-					<input type="radio" name="radio" id="hear" value="hear" /><label for="hear">愛聽</label>
-					<input type="radio" name="radio" id="eat" value="eat" /><label for="eat">愛吃</label>
-					<input type="radio" name="radio" id="drink" value="drink" /><label for="drink">愛喝</label>
-					<input type="radio" name="radio" id="do" value="do" /><label for="do">愛作</label>
-					<input type="radio" name="radio" id="play" value="play" /><label for="play">愛玩</label>
-					<input type="radio" name="radio" id="person" value="person" /><label for="person">愛人</label>
+					<input type="radio" name="radio" id="see" value="愛看" /><label for="see">愛看</label>
+					<input type="radio" name="radio" id="hear" value="愛聽" /><label for="hear">愛聽</label>
+					<input type="radio" name="radio" id="eat" value="愛吃" /><label for="eat">愛吃</label>
+					<input type="radio" name="radio" id="drink" value="愛喝" /><label for="drink">愛喝</label>
+					<input type="radio" name="radio" id="do" value="愛作" /><label for="do">愛作</label>
+					<input type="radio" name="radio" id="play" value="愛玩" /><label for="play">愛玩</label>
+					<input type="radio" name="radio" id="person" value="愛人" /><label for="person">愛人</label>
+					<input type="radio" name="radio" id="buy" value="愛買" /><label for="person">愛買</label>
 					
 				</td>
             <tr>

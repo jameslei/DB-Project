@@ -123,6 +123,8 @@ article>div{
   background-color: #BAC282;
   border-radius: 0 0 0 5px;
   font-size: 90%;
+  position: relative;
+  z-index:1;
 }
 .welcome a, .welcome a:link, .welcome a:visited, .welcome a:active  {color: #EF3C00;}
 .welcome a:hover                                                    {color: #C95F09;}

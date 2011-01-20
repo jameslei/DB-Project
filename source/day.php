@@ -63,20 +63,11 @@
 		        $favor_array = Day::getFavor($day->id);
 		        if($favor_array!=NULL){
 		            echo "<table>";
-			        echo "<tr>";
-		            echo "<th>名字</th>";
-			        echo "<th>時間</th>";
-			        echo "<th>地點</th>";
-			        echo "<th>備註</th>";
-			        echo "</tr>";
 		            foreach ($favor_array as $favor_list){
 				        echo "<tr>";
 		                echo "<td>$favor_list->name</td>";
-				        echo "<td>$favor_list->time</td>";
 						$lid = $favor_list->location_id;
 						$location=Location::find($lid);
-		                echo "<td>$location->name</td>";
-				        echo "<td>$favor_list->note</td>";
 				        echo "</tr>";
 		            }
 			        echo "</table>";

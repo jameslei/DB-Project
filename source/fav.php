@@ -32,6 +32,7 @@
           echo "<th>名字</th>";
 	        echo "<th>時間</th>";
 	        echo "<th>地點</th>";
+	        echo "<th>類型</th>";
 	        echo "<th>備註</th>";
 	        echo "</tr>";
           foreach ($favor_array as $favor_list){
@@ -40,6 +41,7 @@
 		        echo "<td>$favor_list->time</td>";
 				$lid = $favor_list->location_id;
 				$location=Location::find($lid);
+				echo "<td>$favor_list->type</td>";
               echo "<td>$location->name</td>";
 		        echo "<td>$favor_list->note</td>";
 		        echo "</tr>";
@@ -48,11 +50,13 @@
       }else{
           echo "<table><tr><td>尚無資料</td></tr></table>";
       }
+      list($key,$value) = each($_GET);
 	  ?>
-	  
+	  <?php if ($key == "did"){?>
         	  <ul>
-                  <li><a href = "<?php echo "newfav.php"?>">新增</a></li>
+                  <li><a href = "<?php echo "newfav.php?id=".$value;?>">新增</a></li>
               </ul>
+      <?php } ?>
         </div>
     </div>
 <?php require_once "template/footer.php"; ?>
