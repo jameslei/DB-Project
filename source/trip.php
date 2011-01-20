@@ -97,11 +97,10 @@
             }
 	        echo "</table>";
         }else{
-            echo "尚無資料";
+            echo "<table><tr><td>尚無資料</td></tr></table>";
         }
         ?>
         <ul>
-            <li><a href="#">新增</a></li>
             <li><a href=<?php echo "fav.php?tid=$trip->id"?>>更多</a></li>
         </ul> 
     </div>

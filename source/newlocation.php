@@ -14,7 +14,7 @@
                 <?php foreach($cities as $city){
                     echo "<option value=".$city->id.">".$city->name."</option>";
                 }?>
-                </select></td>
+                </select><a href="newcity.php?id=<?php echo $_GET['id'];?>">新增城市</a></td>
             </tr>
             <tr>
                 <td>地點名稱</td>

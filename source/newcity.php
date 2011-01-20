@@ -10,7 +10,7 @@
 ?>
 
 <div id="newcity" class="center">
-    <form method="post" action="create_newcity.php">
+    <form method="post" action="create_newcity.php?id=<?php echo $_GET['id'];?>">
         <table>
             <tr>
                 <th colspan="2"  class="head">新增城市</th>

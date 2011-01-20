@@ -3,7 +3,7 @@
 if (isset($_POST['city'])&&($_POST['city']!='')){
     $city = new City($_POST['city'], $_POST['country_id']);
     if ($city->save()){
-        header("Location: add_day.php");
+        header("Location: newlocation.php?id=".$_GET['id']);
     }else{
         header("Location: newcity.php?error=fail");
     }

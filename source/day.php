@@ -60,8 +60,7 @@
         <table>
             <tr>
                 <?php
-				$id = $day->tid;
-		        $favor_array = Trip::getFavor($id);
+		        $favor_array = Day::getFavor($day->id);
 		        if($favor_array!=NULL){
 		            echo "<table>";
 			        echo "<tr>";
@@ -82,14 +81,14 @@
 		            }
 			        echo "</table>";
 		        }else{
-		            echo "尚無資料";
+		            echo "<table><tr><td>尚無資料</td></tr></table>";
 		        }
 		        ?>
             </tr>
         </table>
         <ul>
-			<li><a href="newfav.php?id=<?php echo $day->id?>">新增</a></li>
-            <li><a href="#">更多</a></li>
+			<li><a href="newfav.php?id=<?php echo $day->id;?>">新增</a></li>
+            <li><a href="fav.php?did=<?php echo $day->id;?>">更多</a></li>
         </ul>
     </div>
 </div>
