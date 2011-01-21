@@ -25,6 +25,8 @@
 		        echo "<a href = trip.php?id=$trip_list->id>";
 		        echo "$trip_list->name";
 	            echo "</a>";
+	            echo "&nbsp;<a href=\"edittrip.php?id=$trip_list->id\" style=\"float:right; padding: 0 5px;\">E</a>";
+	            echo "&nbsp;<a href=\"delete.php?tid=$trip_list->id\" style=\"float:right;\">X</a>";
 		        echo "</td>";
 		        echo "</tr>";
             }

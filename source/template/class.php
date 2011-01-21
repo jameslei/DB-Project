@@ -366,8 +366,9 @@ class Trip{
 
 	}else{  						//existing trip
 		// SQL UPDATE
-		$query = "UPDATE trip SET name='$this->name', type='$this->type', time='$this->time', status='$this->status', belongs_to='$this->belongs_to', owner_id='$this->owner_id' WHERE id='$this->id';";
+		$query = "UPDATE trip SET name='$this->name', type='$this->type', time='$this->time', status='$this->status', belongs_to='$this->belongs_to', owner_id='$this->owner_id' WHERE tid='$this->id';";
 		$result = mysql_query($query);
+		//echo $query;
 	}
 	if(!$result){
 		return false;	
